@@ -45,9 +45,9 @@
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.buttonStart = new System.Windows.Forms.Button();
             this.panelParam = new System.Windows.Forms.Panel();
+            this.labelVoen = new System.Windows.Forms.Label();
             this.textBoxVoen = new System.Windows.Forms.TextBox();
             this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
-            this.labelVoen = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
@@ -71,6 +71,7 @@
             this.comboBoxNov.Size = new System.Drawing.Size(345, 21);
             this.comboBoxNov.TabIndex = 1;
             this.comboBoxNov.SelectedIndexChanged += new System.EventHandler(this.comboBoxNov_Leave);
+            this.comboBoxNov.Enter += new System.EventHandler(this.comboBoxNov_Leave);
             this.comboBoxNov.Leave += new System.EventHandler(this.comboBoxNov_Leave);
             // 
             // comboBoxHereket
@@ -81,6 +82,8 @@
             this.comboBoxHereket.Size = new System.Drawing.Size(345, 21);
             this.comboBoxHereket.TabIndex = 2;
             this.comboBoxHereket.Visible = false;
+            this.comboBoxHereket.SelectedIndexChanged += new System.EventHandler(this.comboBoxHereket_Changed);
+            this.comboBoxHereket.Leave += new System.EventHandler(this.comboBoxHereket_Changed);
             // 
             // labelHereket
             // 
@@ -105,6 +108,7 @@
             // comboBoxDocType
             // 
             this.comboBoxDocType.FormattingEnabled = true;
+            this.comboBoxDocType.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.comboBoxDocType.Location = new System.Drawing.Point(9, 105);
             this.comboBoxDocType.Name = "comboBoxDocType";
             this.comboBoxDocType.Size = new System.Drawing.Size(345, 21);
@@ -224,6 +228,15 @@
             this.panelParam.TabIndex = 8;
             this.panelParam.Visible = false;
             // 
+            // labelVoen
+            // 
+            this.labelVoen.AutoSize = true;
+            this.labelVoen.Location = new System.Drawing.Point(6, 7);
+            this.labelVoen.Name = "labelVoen";
+            this.labelVoen.Size = new System.Drawing.Size(35, 13);
+            this.labelVoen.TabIndex = 1;
+            this.labelVoen.Text = "Vöen:";
+            // 
             // textBoxVoen
             // 
             this.textBoxVoen.Location = new System.Drawing.Point(47, 4);
@@ -239,15 +252,6 @@
             this.richTextBoxQuestion.TabIndex = 17;
             this.richTextBoxQuestion.Text = "";
             this.richTextBoxQuestion.Visible = false;
-            // 
-            // labelVoen
-            // 
-            this.labelVoen.AutoSize = true;
-            this.labelVoen.Location = new System.Drawing.Point(6, 7);
-            this.labelVoen.Name = "labelVoen";
-            this.labelVoen.Size = new System.Drawing.Size(35, 13);
-            this.labelVoen.TabIndex = 1;
-            this.labelVoen.Text = "Vöen:";
             // 
             // Main
             // 

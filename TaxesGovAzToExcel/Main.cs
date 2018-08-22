@@ -50,9 +50,14 @@ namespace TaxesGovAzToExcel
             {
                 comboBoxHereket.Items.Add("Gələnlər");
                 comboBoxHereket.Items.Add("Göndərdiklərim");
+            } else
+            {
+                labelDocType.Visible = false;
+                comboBoxDocType.Visible = false;
             }
             comboBoxHereket.Text = "";
             if (comboBoxHereket.Items.Count > 0) comboBoxHereket.SelectedIndex = 0;
+
         }
 
         private void pictureBoxQuestion_Click(object sender, EventArgs e)
@@ -83,6 +88,49 @@ namespace TaxesGovAzToExcel
         {
             if (panelParam.Visible == true) panelParam.Visible = false;
             if (richTextBoxQuestion.Visible == true) richTextBoxQuestion.Visible = false;
+            pictureBoxLogo.Visible = true;
+        }
+
+        private void comboBoxHereket_Changed(object sender, EventArgs e)
+        {
+            labelDocType.Visible = true;
+            comboBoxDocType.Visible = true;
+            if (comboBoxNov.SelectedIndex == 0 || comboBoxNov.SelectedIndex == 1)
+            {
+                if (comboBoxHereket.SelectedIndex == 0)
+                {
+                    DocType = 'I';
+                }
+                else if (comboBoxHereket.SelectedIndex == 1)
+                {
+                    DocType = 'O';
+                }
+                comboBoxDocType.Text = "";
+                comboBoxDocType.Items.Clear();
+                if (comboBoxNov.SelectedIndex == 0)
+                {
+                    /*0*/comboBoxDocType.Items.Add("Hamısı");
+                    /*1*/comboBoxDocType.Items.Add("Normal");
+                    /*2*/comboBoxDocType.Items.Add("Ləğv olunmuşlar");
+                    /*3*/comboBoxDocType.Items.Add("Dəqiqləşmiş");
+                }
+                else if (comboBoxNov.SelectedIndex == 1)
+                {
+                    /*0*/ comboBoxDocType.Items.Add("Hamısı");
+                    /*1*/ comboBoxDocType.Items.Add("Dəqiqləşmiş");
+                    /*2*/ comboBoxDocType.Items.Add("Ləğv edilib (Qaimə ləğv edilib)");
+                    /*3*/ comboBoxDocType.Items.Add("(Təsdiq gözləyən)");
+                    /*4*/ comboBoxDocType.Items.Add("Normal(Təsdiqlənmiş)");
+                    /*5*/ comboBoxDocType.Items.Add("EVHF hazırlanıb (Faktura hazırlanıb)");
+                    /*6*/ comboBoxDocType.Items.Add("Rədd olunub (Rədd olunub)");
+                    /*7*/ comboBoxDocType.Items.Add("EVHF göndərilib (Faktura göndərilib)");
+                    /*8*/ comboBoxDocType.Items.Add("EVHF ləğv olunub (Faktura ləğv olunub)");
+                    /*9*/ comboBoxDocType.Items.Add("(Sistem tərəfindən təsdiqlənmiş)");
+                    /*10*/comboBoxDocType.Items.Add("Sistem EVHF hazırlayıb (Sistem fakturanı hazırlayıb)");
+                    /*11*/comboBoxDocType.Items.Add("Sistem qaiməni ləğv edib (Sistem qaiməni ləğv edib)");
+                }
+            }
+            if (comboBoxDocType.Items.Count > 0) comboBoxDocType.SelectedIndex = 0;
         }
 
         private void LinkCheck(object sender, EventArgs e)
