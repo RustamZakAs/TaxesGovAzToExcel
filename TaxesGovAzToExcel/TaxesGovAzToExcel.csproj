@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateExcelFile.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +76,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2000px-Microsoft_Excel_2013_logo.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iconstoc-Ms-Office-2013-Excel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_41580.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -40,11 +40,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.pictureBoxParam = new System.Windows.Forms.PictureBox();
+            this.pictureBoxQuestion = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panelParam = new System.Windows.Forms.Panel();
+            this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // labelNov
@@ -121,6 +125,7 @@
             this.textBox1.Size = new System.Drawing.Size(345, 20);
             this.textBox1.TabIndex = 8;
             this.textBox1.Visible = false;
+            this.textBox1.Enter += new System.EventHandler(this.LinkCheck);
             // 
             // dateTimePicker1
             // 
@@ -158,43 +163,79 @@
             this.dateTimePicker2.TabIndex = 12;
             this.dateTimePicker2.Visible = false;
             // 
+            // pictureBoxParam
+            // 
+            this.pictureBoxParam.Image = global::TaxesGovAzToExcel.Properties.Resources.img_41580;
+            this.pictureBoxParam.Location = new System.Drawing.Point(519, 233);
+            this.pictureBoxParam.Name = "pictureBoxParam";
+            this.pictureBoxParam.Size = new System.Drawing.Size(28, 26);
+            this.pictureBoxParam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxParam.TabIndex = 15;
+            this.pictureBoxParam.TabStop = false;
+            this.pictureBoxParam.Click += new System.EventHandler(this.pictureBoxParam_Click);
+            // 
+            // pictureBoxQuestion
+            // 
+            this.pictureBoxQuestion.Image = global::TaxesGovAzToExcel.Properties.Resources.question_mark_PNG48;
+            this.pictureBoxQuestion.Location = new System.Drawing.Point(553, 233);
+            this.pictureBoxQuestion.Name = "pictureBoxQuestion";
+            this.pictureBoxQuestion.Size = new System.Drawing.Size(28, 26);
+            this.pictureBoxQuestion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxQuestion.TabIndex = 4;
+            this.pictureBoxQuestion.TabStop = false;
+            this.pictureBoxQuestion.Click += new System.EventHandler(this.pictureBoxQuestion_Click);
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.Image = global::TaxesGovAzToExcel.Properties.Resources.images;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(363, 6);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(218, 227);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLogo.TabIndex = 14;
+            this.pictureBoxLogo.TabStop = false;
+            // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(145, 210);
+            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonStart.Image = global::TaxesGovAzToExcel.Properties.Resources.Iconstoc_Ms_Office_2013_Excel;
+            this.buttonStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonStart.Location = new System.Drawing.Point(8, 218);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.Size = new System.Drawing.Size(79, 40);
             this.buttonStart.TabIndex = 13;
             this.buttonStart.Text = "Yüklə";
+            this.buttonStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Visible = false;
             // 
-            // pictureBox1
+            // panelParam
             // 
-            this.pictureBox1.Image = global::TaxesGovAzToExcel.Properties.Resources.question_mark_PNG48;
-            this.pictureBox1.Location = new System.Drawing.Point(553, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 26);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.panelParam.Location = new System.Drawing.Point(363, 6);
+            this.panelParam.Name = "panelParam";
+            this.panelParam.Size = new System.Drawing.Size(218, 227);
+            this.panelParam.TabIndex = 16;
+            this.panelParam.Visible = false;
             // 
-            // pictureBox2
+            // richTextBoxQuestion
             // 
-            this.pictureBox2.Image = global::TaxesGovAzToExcel.Properties.Resources.images;
-            this.pictureBox2.Location = new System.Drawing.Point(363, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(218, 227);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 14;
-            this.pictureBox2.TabStop = false;
+            this.richTextBoxQuestion.Location = new System.Drawing.Point(363, 6);
+            this.richTextBoxQuestion.Name = "richTextBoxQuestion";
+            this.richTextBoxQuestion.Size = new System.Drawing.Size(218, 227);
+            this.richTextBoxQuestion.TabIndex = 17;
+            this.richTextBoxQuestion.Text = "";
+            this.richTextBoxQuestion.Visible = false;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 237);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pictureBox2);
+            this.ClientSize = new System.Drawing.Size(588, 265);
+            this.Controls.Add(this.pictureBoxParam);
+            this.Controls.Add(this.pictureBoxQuestion);
+            this.Controls.Add(this.richTextBoxQuestion);
+            this.Controls.Add(this.panelParam);
+            this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.label4);
@@ -210,8 +251,10 @@
             this.Controls.Add(this.labelNov);
             this.Name = "Main";
             this.Text = "AR İnternet Vergi İdarəsinin elektron saytından məlumatların alınması";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.Click += new System.EventHandler(this.Main_Click);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,7 +266,7 @@
         private System.Windows.Forms.ComboBox comboBoxNov;
         private System.Windows.Forms.ComboBox comboBoxHereket;
         private System.Windows.Forms.Label labelHereket;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxQuestion;
         private System.Windows.Forms.Label labelDocType;
         private System.Windows.Forms.ComboBox comboBoxDocType;
         private System.Windows.Forms.Label label2;
@@ -233,7 +276,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.PictureBox pictureBoxParam;
+        private System.Windows.Forms.Panel panelParam;
+        private System.Windows.Forms.RichTextBox richTextBoxQuestion;
     }
 }
 

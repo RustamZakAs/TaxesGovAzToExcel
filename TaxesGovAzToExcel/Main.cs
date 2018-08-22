@@ -10,6 +10,13 @@ namespace TaxesGovAzToExcel
 {
     public partial class Main : Form
     {
+        private static string myTextForBegin;
+        public static string TextForBegin
+        {
+            get { return myTextForBegin = "&nbsp;"; }
+            set { myTextForBegin = value; }
+        }
+
         public Main()
         {
             InitializeComponent();
@@ -36,6 +43,41 @@ namespace TaxesGovAzToExcel
             }
             comboBoxHereket.Text = "";
             if (comboBoxHereket.Items.Count > 0) comboBoxHereket.SelectedIndex = 0;
+        }
+
+        private void pictureBoxQuestion_Click(object sender, EventArgs e)
+        {
+            if (pictureBoxLogo.Visible == true) pictureBoxLogo.Visible = false;
+            if (panelParam.Visible == true) panelParam.Visible = false;
+            if (richTextBoxQuestion.Visible == false) richTextBoxQuestion.Visible = true;
+            else
+            {
+                richTextBoxQuestion.Visible = false;
+                pictureBoxLogo.Visible = true;
+            }
+        }
+
+        private void pictureBoxParam_Click(object sender, EventArgs e)
+        {
+            if (pictureBoxLogo.Visible == true) pictureBoxLogo.Visible = false;
+            if (richTextBoxQuestion.Visible == true) richTextBoxQuestion.Visible = false;
+            if (panelParam.Visible == false) panelParam.Visible = true;
+            else
+            {
+                panelParam.Visible = false;
+                pictureBoxLogo.Visible = true;
+            }
+        }
+
+        private void Main_Click(object sender, EventArgs e)
+        {
+            if (panelParam.Visible == true) panelParam.Visible = false;
+            if (richTextBoxQuestion.Visible == true) richTextBoxQuestion.Visible = false;
+        }
+
+        private void LinkCheck(object sender, EventArgs e)
+        {
+
         }
     }
 }

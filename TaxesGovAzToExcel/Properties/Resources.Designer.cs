@@ -63,9 +63,39 @@ namespace TaxesGovAzToExcel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _2000px_Microsoft_Excel_2013_logo_svg {
+            get {
+                object obj = ResourceManager.GetObject("2000px-Microsoft_Excel_2013_logo.svg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Iconstoc_Ms_Office_2013_Excel {
+            get {
+                object obj = ResourceManager.GetObject("Iconstoc-Ms-Office-2013-Excel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap images {
             get {
                 object obj = ResourceManager.GetObject("images", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap img_41580 {
+            get {
+                object obj = ResourceManager.GetObject("img_41580", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
