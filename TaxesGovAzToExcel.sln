@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxesGovAzToExcel", "TaxesGovAzToExcel\TaxesGovAzToExcel.csproj", "{0A4F9316-9DF7-4D0D-835F-59EF42D6E0CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A4F9316-9DF7-4D0D-835F-59EF42D6E0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4F9316-9DF7-4D0D-835F-59EF42D6E0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4F9316-9DF7-4D0D-835F-59EF42D6E0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4F9316-9DF7-4D0D-835F-59EF42D6E0CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {045C2C08-B03D-4E48-977A-CCBFDB02449F}
+	EndGlobalSection
+EndGlobal
