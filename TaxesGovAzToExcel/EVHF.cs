@@ -119,7 +119,7 @@ namespace TaxesGovAzToExcel
             //*** var temp = Path.GetTempFileName();
             //*** var tempFile = temp.Replace(Path.GetExtension(temp), ".html");
 
-            MainTaxes.CreateDir(@"C:\RZUploadingTaxesDocuments");
+            Main.CreateDir(@"C:\RZUploadingTaxesDocuments");
 
             for (int i = 0; i < link.Length; i++)
             {
@@ -140,7 +140,7 @@ namespace TaxesGovAzToExcel
                     var result = wc.DownloadString(link[i]);
 
                     string type;
-                    if (MainTaxes.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
+                    if (Main.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
                     System.IO.File.WriteAllText($@"C:\RZUploadingTaxesDocuments\{type}{i}).html", result);
                     Console.WriteLine($"File {i} created");
                 }
@@ -174,7 +174,7 @@ namespace TaxesGovAzToExcel
                     //}
                     //htmlDoc.Load($@"C:\New folder\text{m}.html");
                     string type;
-                    if (MainTaxes.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
+                    if (Main.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
                     htmlDoc = htmlWeb.Load($@"C:\RZUploadingTaxesDocuments\{type}{m}).html");
                 }
                 catch (Exception e)
@@ -201,12 +201,12 @@ namespace TaxesGovAzToExcel
             for (int i = 0; i < str.Length; i++)
             {
                 string tempDocx = "";
-                for (; j < MainTaxes.TextForBegin.Length; j++)
+                for (; j < Main.TextForBegin.Length; j++)
                 {
                     tempDocx += str[(i + j) >= str.Length - 1 ?
                         str.Length - 1 : (i + j)];
                 }
-                if (tempDocx == MainTaxes.TextForBegin)
+                if (tempDocx == Main.TextForBegin)
                 {
                     count++;
                     string Xvalue = "";
@@ -225,7 +225,7 @@ namespace TaxesGovAzToExcel
                         str.Length - 1 : (i + j + k + Xvalue.Length);
                     if (count == 1)
                     {
-                        RZEVHF/*[0]*/.IO = MainTaxes.TaxesIO;
+                        RZEVHF/*[0]*/.IO = Main.TaxesIO;
                         RZEVHF/*[1]*/.Voen = Xvalue;
                     }
                     if (count == 2) RZEVHF/*[2]*/.Ad = Xvalue;
@@ -247,18 +247,18 @@ namespace TaxesGovAzToExcel
                         //Xvalue = Xvalue.Replace(".", ",");
                         //RZEVHF.EDV = decimal.Parse(Xvalue);
                         RZEVHF/*[11]*/.EDV = Xvalue;
-                        RZEVHF/*[12]*/.Hesab1C = (MainTaxes.TaxesIO == "I" ? "531.1" : "211.3");
+                        RZEVHF/*[12]*/.Hesab1C = (Main.TaxesIO == "I" ? "531.1" : "211.3");
                         RZEVHF/*[13]*/.MVQeyd = "";
                         //Console.WriteLine(RZEVHF.ToString());
-                        if (MainTaxes.TaxesVeziyyet == 1)
+                        if (Main.TaxesVeziyyet == 1)
                         {
                             if (RZEVHF.Veziyyet == "N") RZEVHFList.Add(new EVHF(RZEVHF));
                         }
-                        else if (MainTaxes.TaxesVeziyyet == 2)
+                        else if (Main.TaxesVeziyyet == 2)
                         {
                             if (RZEVHF.Veziyyet == "L") RZEVHFList.Add(new EVHF(RZEVHF));
                         }
-                        else if (MainTaxes.TaxesVeziyyet == 3)
+                        else if (Main.TaxesVeziyyet == 3)
                         {
                             if (RZEVHF.Tip == "D") RZEVHFList.Add(new EVHF(RZEVHF));
                         }
@@ -352,7 +352,7 @@ namespace TaxesGovAzToExcel
 
             foreach (var i in EVHFs)
             {
-                dt0.Rows.Add(new object[] { MainTaxes.TaxesIO, i.Voen, i.Ad, i.Tip, i.Veziyyet, i.Tarix, i.Seriya, i.Nomre, i.EsasQeyd, i.ElaveQeyd, i.EDVsiz, i.EDV, i.Hesab1C, i.MVQeyd });
+                dt0.Rows.Add(new object[] { Main.TaxesIO, i.Voen, i.Ad, i.Tip, i.Veziyyet, i.Tarix, i.Seriya, i.Nomre, i.EsasQeyd, i.ElaveQeyd, i.EDVsiz, i.EDV, i.Hesab1C, i.MVQeyd });
             }
             //for (int i = 0; i < EVHFs.Count; i++)
             //{

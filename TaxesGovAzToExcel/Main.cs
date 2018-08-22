@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -10,13 +11,20 @@ namespace TaxesGovAzToExcel
 {
     public partial class Main : Form
     {
+        //*****************************************
+        public static int DocType { get; set; }
+        //*****************************************
         private static string myTextForBegin;
         public static string TextForBegin
         {
             get { return myTextForBegin = "&nbsp;"; }
             set { myTextForBegin = value; }
         }
-
+        //*****************************************
+        public static string TaxesIO { get; set; }
+        //*****************************************
+        public static int TaxesVeziyyet { get; set; }
+        //*****************************************
         public Main()
         {
             InitializeComponent();
@@ -80,6 +88,34 @@ namespace TaxesGovAzToExcel
         private void LinkCheck(object sender, EventArgs e)
         {
 
+        }
+
+        public static void CreateDir(string path)
+        {
+            // Specify the directory you want to manipulate.
+            //path = @"C:\EVHF files";
+            try
+            {
+                // Determine whether the directory exists.
+                if (Directory.Exists(path))
+                {
+                    Console.WriteLine("That path exists already.");
+                    return;
+                }
+
+                // Try to create the directory.
+                DirectoryInfo di = Directory.CreateDirectory(path);
+                Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(path));
+
+                // Delete the directory.
+                //di.Delete();
+                //Console.WriteLine("The directory was deleted successfully.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
+            finally { }
         }
     }
 }

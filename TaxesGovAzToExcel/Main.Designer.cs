@@ -45,8 +45,9 @@
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.buttonStart = new System.Windows.Forms.Button();
             this.panelParam = new System.Windows.Forms.Panel();
-            this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
             this.textBoxVoen = new System.Windows.Forms.TextBox();
+            this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
+            this.labelVoen = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
@@ -107,7 +108,7 @@
             this.comboBoxDocType.Location = new System.Drawing.Point(9, 105);
             this.comboBoxDocType.Name = "comboBoxDocType";
             this.comboBoxDocType.Size = new System.Drawing.Size(345, 21);
-            this.comboBoxDocType.TabIndex = 6;
+            this.comboBoxDocType.TabIndex = 3;
             this.comboBoxDocType.Visible = false;
             // 
             // label2
@@ -125,7 +126,7 @@
             this.textBox1.Location = new System.Drawing.Point(9, 145);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(345, 20);
-            this.textBox1.TabIndex = 8;
+            this.textBox1.TabIndex = 4;
             this.textBox1.Visible = false;
             this.textBox1.Enter += new System.EventHandler(this.LinkCheck);
             // 
@@ -134,7 +135,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(9, 184);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(165, 20);
-            this.dateTimePicker1.TabIndex = 9;
+            this.dateTimePicker1.TabIndex = 5;
             this.dateTimePicker1.Visible = false;
             // 
             // label3
@@ -162,7 +163,7 @@
             this.dateTimePicker2.Location = new System.Drawing.Point(189, 184);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(165, 20);
-            this.dateTimePicker2.TabIndex = 12;
+            this.dateTimePicker2.TabIndex = 6;
             this.dateTimePicker2.Visible = false;
             // 
             // pictureBoxParam
@@ -205,7 +206,7 @@
             this.buttonStart.Location = new System.Drawing.Point(8, 218);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(79, 40);
-            this.buttonStart.TabIndex = 13;
+            this.buttonStart.TabIndex = 7;
             this.buttonStart.Text = "Yüklə";
             this.buttonStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -213,12 +214,22 @@
             // 
             // panelParam
             // 
+            this.panelParam.BackColor = System.Drawing.SystemColors.Control;
+            this.panelParam.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelParam.Controls.Add(this.labelVoen);
             this.panelParam.Controls.Add(this.textBoxVoen);
             this.panelParam.Location = new System.Drawing.Point(363, 6);
             this.panelParam.Name = "panelParam";
             this.panelParam.Size = new System.Drawing.Size(218, 227);
-            this.panelParam.TabIndex = 16;
+            this.panelParam.TabIndex = 8;
             this.panelParam.Visible = false;
+            // 
+            // textBoxVoen
+            // 
+            this.textBoxVoen.Location = new System.Drawing.Point(47, 4);
+            this.textBoxVoen.Name = "textBoxVoen";
+            this.textBoxVoen.Size = new System.Drawing.Size(164, 20);
+            this.textBoxVoen.TabIndex = 9;
             // 
             // richTextBoxQuestion
             // 
@@ -229,13 +240,14 @@
             this.richTextBoxQuestion.Text = "";
             this.richTextBoxQuestion.Visible = false;
             // 
-            // textBoxVoen
+            // labelVoen
             // 
-            this.textBoxVoen.Location = new System.Drawing.Point(3, 6);
-            this.textBoxVoen.Name = "textBoxVoen";
-            this.textBoxVoen.Size = new System.Drawing.Size(210, 20);
-            this.textBoxVoen.TabIndex = 0;
-            this.textBoxVoen.Text = "Vöen:";
+            this.labelVoen.AutoSize = true;
+            this.labelVoen.Location = new System.Drawing.Point(6, 7);
+            this.labelVoen.Name = "labelVoen";
+            this.labelVoen.Size = new System.Drawing.Size(35, 13);
+            this.labelVoen.TabIndex = 1;
+            this.labelVoen.Text = "Vöen:";
             // 
             // Main
             // 
@@ -294,6 +306,7 @@
         private System.Windows.Forms.Panel panelParam;
         private System.Windows.Forms.RichTextBox richTextBoxQuestion;
         private System.Windows.Forms.TextBox textBoxVoen;
+        private System.Windows.Forms.Label labelVoen;
     }
 }
 
