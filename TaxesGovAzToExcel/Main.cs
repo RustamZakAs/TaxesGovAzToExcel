@@ -28,6 +28,8 @@ namespace TaxesGovAzToExcel
             /*2*/comboBoxNov.Items.Add("Əvəzləşmə ayı üzrə məlumatın alınması");
             /*3*/comboBoxNov.Items.Add("Depozit hesabından hərəkətin çıxarışı");
 
+            textBoxVoen.Text = "1501069851";
+
             if (comboBoxNov.Items.Count > 0) comboBoxNov.SelectedIndex = 0;
         }
 

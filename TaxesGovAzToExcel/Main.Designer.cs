@@ -46,9 +46,11 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.panelParam = new System.Windows.Forms.Panel();
             this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
+            this.textBoxVoen = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            this.panelParam.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelNov
@@ -211,6 +213,7 @@
             // 
             // panelParam
             // 
+            this.panelParam.Controls.Add(this.textBoxVoen);
             this.panelParam.Location = new System.Drawing.Point(363, 6);
             this.panelParam.Name = "panelParam";
             this.panelParam.Size = new System.Drawing.Size(218, 227);
@@ -226,6 +229,14 @@
             this.richTextBoxQuestion.Text = "";
             this.richTextBoxQuestion.Visible = false;
             // 
+            // textBoxVoen
+            // 
+            this.textBoxVoen.Location = new System.Drawing.Point(3, 6);
+            this.textBoxVoen.Name = "textBoxVoen";
+            this.textBoxVoen.Size = new System.Drawing.Size(210, 20);
+            this.textBoxVoen.TabIndex = 0;
+            this.textBoxVoen.Text = "Vöen:";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,7 +244,6 @@
             this.ClientSize = new System.Drawing.Size(588, 265);
             this.Controls.Add(this.pictureBoxParam);
             this.Controls.Add(this.pictureBoxQuestion);
-            this.Controls.Add(this.richTextBoxQuestion);
             this.Controls.Add(this.panelParam);
             this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.buttonStart);
@@ -249,12 +259,15 @@
             this.Controls.Add(this.comboBoxHereket);
             this.Controls.Add(this.comboBoxNov);
             this.Controls.Add(this.labelNov);
+            this.Controls.Add(this.richTextBoxQuestion);
             this.Name = "Main";
             this.Text = "AR İnternet Vergi İdarəsinin elektron saytından məlumatların alınması";
             this.Click += new System.EventHandler(this.Main_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            this.panelParam.ResumeLayout(false);
+            this.panelParam.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,6 +293,7 @@
         private System.Windows.Forms.PictureBox pictureBoxParam;
         private System.Windows.Forms.Panel panelParam;
         private System.Windows.Forms.RichTextBox richTextBoxQuestion;
+        private System.Windows.Forms.TextBox textBoxVoen;
     }
 }
 
