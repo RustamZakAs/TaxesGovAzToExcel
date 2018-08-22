@@ -73,5 +73,8 @@
   <ItemGroup>
     <None Include="Resources\question_mark_PNG48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

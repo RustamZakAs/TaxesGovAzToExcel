@@ -26,6 +26,8 @@ namespace TaxesGovAzToExcel
 
         private void comboBoxNov_Leave(object sender, EventArgs e)
         {
+            labelHereket.Visible = true;
+            comboBoxHereket.Visible = true;
             comboBoxHereket.Items.Clear();
             if (comboBoxNov.SelectedIndex == 0 || comboBoxNov.SelectedIndex == 1)
             {
