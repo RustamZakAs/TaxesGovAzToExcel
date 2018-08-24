@@ -93,6 +93,16 @@ namespace TaxesGovAzToExcel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap img_374176 {
+            get {
+                object obj = ResourceManager.GetObject("img_374176", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap img_41580 {
             get {
                 object obj = ResourceManager.GetObject("img_41580", resourceCulture);

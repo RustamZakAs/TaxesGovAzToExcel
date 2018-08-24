@@ -34,24 +34,26 @@
             this.labelHereket = new System.Windows.Forms.Label();
             this.labelDocType = new System.Windows.Forms.Label();
             this.comboBoxDocType = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.pictureBoxParam = new System.Windows.Forms.PictureBox();
-            this.pictureBoxQuestion = new System.Windows.Forms.PictureBox();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
-            this.buttonStart = new System.Windows.Forms.Button();
+            this.labelLink = new System.Windows.Forms.Label();
+            this.textBoxLink = new System.Windows.Forms.TextBox();
+            this.dateTimePickerIlk = new System.Windows.Forms.DateTimePicker();
+            this.labelIlkTarix = new System.Windows.Forms.Label();
+            this.labelSonTarix = new System.Windows.Forms.Label();
+            this.dateTimePickerSon = new System.Windows.Forms.DateTimePicker();
             this.panelParam = new System.Windows.Forms.Panel();
             this.labelVoen = new System.Windows.Forms.Label();
             this.textBoxVoen = new System.Windows.Forms.TextBox();
             this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
+            this.pictureBoxReport = new System.Windows.Forms.PictureBox();
+            this.pictureBoxParam = new System.Windows.Forms.PictureBox();
+            this.pictureBoxQuestion = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.buttonStart = new System.Windows.Forms.Button();
+            this.panelParam.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
-            this.panelParam.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelNov
@@ -114,61 +116,111 @@
             this.comboBoxDocType.Size = new System.Drawing.Size(345, 21);
             this.comboBoxDocType.TabIndex = 3;
             this.comboBoxDocType.Visible = false;
+            this.comboBoxDocType.SelectedIndexChanged += new System.EventHandler(this.comboBoxDocType_Changed);
             // 
-            // label2
+            // labelLink
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 129);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Saytın linkini daxil edin:";
-            this.label2.Visible = false;
+            this.labelLink.AutoSize = true;
+            this.labelLink.Location = new System.Drawing.Point(6, 129);
+            this.labelLink.Name = "labelLink";
+            this.labelLink.Size = new System.Drawing.Size(115, 13);
+            this.labelLink.TabIndex = 7;
+            this.labelLink.Text = "Saytın linkini daxil edin:";
+            this.labelLink.Visible = false;
             // 
-            // textBox1
+            // textBoxLink
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 145);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(345, 20);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.Visible = false;
-            this.textBox1.Enter += new System.EventHandler(this.LinkCheck);
+            this.textBoxLink.Location = new System.Drawing.Point(9, 145);
+            this.textBoxLink.Name = "textBoxLink";
+            this.textBoxLink.Size = new System.Drawing.Size(345, 20);
+            this.textBoxLink.TabIndex = 4;
+            this.textBoxLink.Visible = false;
+            this.textBoxLink.Leave += new System.EventHandler(this.textBoxLink_Leave);
             // 
-            // dateTimePicker1
+            // dateTimePickerIlk
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(9, 184);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(165, 20);
-            this.dateTimePicker1.TabIndex = 5;
-            this.dateTimePicker1.Visible = false;
+            this.dateTimePickerIlk.Location = new System.Drawing.Point(9, 184);
+            this.dateTimePickerIlk.Name = "dateTimePickerIlk";
+            this.dateTimePickerIlk.Size = new System.Drawing.Size(165, 20);
+            this.dateTimePickerIlk.TabIndex = 5;
+            this.dateTimePickerIlk.Visible = false;
             // 
-            // label3
+            // labelIlkTarix
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 168);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "İlkin tarix:";
-            this.label3.Visible = false;
+            this.labelIlkTarix.AutoSize = true;
+            this.labelIlkTarix.Location = new System.Drawing.Point(6, 168);
+            this.labelIlkTarix.Name = "labelIlkTarix";
+            this.labelIlkTarix.Size = new System.Drawing.Size(51, 13);
+            this.labelIlkTarix.TabIndex = 10;
+            this.labelIlkTarix.Text = "İlkin tarix:";
+            this.labelIlkTarix.Visible = false;
             // 
-            // label4
+            // labelSonTarix
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(186, 168);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Son tarix:";
-            this.label4.Visible = false;
+            this.labelSonTarix.AutoSize = true;
+            this.labelSonTarix.Location = new System.Drawing.Point(186, 168);
+            this.labelSonTarix.Name = "labelSonTarix";
+            this.labelSonTarix.Size = new System.Drawing.Size(51, 13);
+            this.labelSonTarix.TabIndex = 11;
+            this.labelSonTarix.Text = "Son tarix:";
+            this.labelSonTarix.Visible = false;
             // 
-            // dateTimePicker2
+            // dateTimePickerSon
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(189, 184);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(165, 20);
-            this.dateTimePicker2.TabIndex = 6;
-            this.dateTimePicker2.Visible = false;
+            this.dateTimePickerSon.Location = new System.Drawing.Point(189, 184);
+            this.dateTimePickerSon.Name = "dateTimePickerSon";
+            this.dateTimePickerSon.Size = new System.Drawing.Size(165, 20);
+            this.dateTimePickerSon.TabIndex = 6;
+            this.dateTimePickerSon.Visible = false;
+            // 
+            // panelParam
+            // 
+            this.panelParam.BackColor = System.Drawing.SystemColors.Control;
+            this.panelParam.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelParam.Controls.Add(this.labelVoen);
+            this.panelParam.Controls.Add(this.textBoxVoen);
+            this.panelParam.Location = new System.Drawing.Point(363, 6);
+            this.panelParam.Name = "panelParam";
+            this.panelParam.Size = new System.Drawing.Size(218, 227);
+            this.panelParam.TabIndex = 8;
+            this.panelParam.Visible = false;
+            // 
+            // labelVoen
+            // 
+            this.labelVoen.AutoSize = true;
+            this.labelVoen.Location = new System.Drawing.Point(6, 7);
+            this.labelVoen.Name = "labelVoen";
+            this.labelVoen.Size = new System.Drawing.Size(35, 13);
+            this.labelVoen.TabIndex = 1;
+            this.labelVoen.Text = "Vöen:";
+            // 
+            // textBoxVoen
+            // 
+            this.textBoxVoen.Location = new System.Drawing.Point(47, 4);
+            this.textBoxVoen.Name = "textBoxVoen";
+            this.textBoxVoen.Size = new System.Drawing.Size(164, 20);
+            this.textBoxVoen.TabIndex = 9;
+            // 
+            // richTextBoxQuestion
+            // 
+            this.richTextBoxQuestion.Location = new System.Drawing.Point(363, 6);
+            this.richTextBoxQuestion.Name = "richTextBoxQuestion";
+            this.richTextBoxQuestion.Size = new System.Drawing.Size(218, 227);
+            this.richTextBoxQuestion.TabIndex = 17;
+            this.richTextBoxQuestion.Text = "";
+            this.richTextBoxQuestion.Visible = false;
+            // 
+            // pictureBoxReport
+            // 
+            this.pictureBoxReport.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pictureBoxReport.Image = global::TaxesGovAzToExcel.Properties.Resources.img_374176;
+            this.pictureBoxReport.Location = new System.Drawing.Point(485, 233);
+            this.pictureBoxReport.Name = "pictureBoxReport";
+            this.pictureBoxReport.Size = new System.Drawing.Size(28, 26);
+            this.pictureBoxReport.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxReport.TabIndex = 18;
+            this.pictureBoxReport.TabStop = false;
+            this.pictureBoxReport.Click += new System.EventHandler(this.pictureBoxQuestion_Click);
             // 
             // pictureBoxParam
             // 
@@ -215,60 +267,25 @@
             this.buttonStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Visible = false;
-            // 
-            // panelParam
-            // 
-            this.panelParam.BackColor = System.Drawing.SystemColors.Control;
-            this.panelParam.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelParam.Controls.Add(this.labelVoen);
-            this.panelParam.Controls.Add(this.textBoxVoen);
-            this.panelParam.Location = new System.Drawing.Point(363, 6);
-            this.panelParam.Name = "panelParam";
-            this.panelParam.Size = new System.Drawing.Size(218, 227);
-            this.panelParam.TabIndex = 8;
-            this.panelParam.Visible = false;
-            // 
-            // labelVoen
-            // 
-            this.labelVoen.AutoSize = true;
-            this.labelVoen.Location = new System.Drawing.Point(6, 7);
-            this.labelVoen.Name = "labelVoen";
-            this.labelVoen.Size = new System.Drawing.Size(35, 13);
-            this.labelVoen.TabIndex = 1;
-            this.labelVoen.Text = "Vöen:";
-            // 
-            // textBoxVoen
-            // 
-            this.textBoxVoen.Location = new System.Drawing.Point(47, 4);
-            this.textBoxVoen.Name = "textBoxVoen";
-            this.textBoxVoen.Size = new System.Drawing.Size(164, 20);
-            this.textBoxVoen.TabIndex = 9;
-            // 
-            // richTextBoxQuestion
-            // 
-            this.richTextBoxQuestion.Location = new System.Drawing.Point(363, 6);
-            this.richTextBoxQuestion.Name = "richTextBoxQuestion";
-            this.richTextBoxQuestion.Size = new System.Drawing.Size(218, 227);
-            this.richTextBoxQuestion.TabIndex = 17;
-            this.richTextBoxQuestion.Text = "";
-            this.richTextBoxQuestion.Visible = false;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 265);
+            this.Controls.Add(this.pictureBoxReport);
             this.Controls.Add(this.pictureBoxParam);
             this.Controls.Add(this.pictureBoxQuestion);
             this.Controls.Add(this.panelParam);
             this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.buttonStart);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dateTimePickerSon);
+            this.Controls.Add(this.labelSonTarix);
+            this.Controls.Add(this.labelIlkTarix);
+            this.Controls.Add(this.dateTimePickerIlk);
+            this.Controls.Add(this.textBoxLink);
+            this.Controls.Add(this.labelLink);
             this.Controls.Add(this.comboBoxDocType);
             this.Controls.Add(this.labelDocType);
             this.Controls.Add(this.labelHereket);
@@ -279,11 +296,12 @@
             this.Name = "Main";
             this.Text = "AR İnternet Vergi İdarəsinin elektron saytından məlumatların alınması";
             this.Click += new System.EventHandler(this.Main_Click);
+            this.panelParam.ResumeLayout(false);
+            this.panelParam.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
-            this.panelParam.ResumeLayout(false);
-            this.panelParam.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,12 +316,12 @@
         private System.Windows.Forms.PictureBox pictureBoxQuestion;
         private System.Windows.Forms.Label labelDocType;
         private System.Windows.Forms.ComboBox comboBoxDocType;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Label labelLink;
+        private System.Windows.Forms.TextBox textBoxLink;
+        private System.Windows.Forms.DateTimePicker dateTimePickerIlk;
+        private System.Windows.Forms.Label labelIlkTarix;
+        private System.Windows.Forms.Label labelSonTarix;
+        private System.Windows.Forms.DateTimePicker dateTimePickerSon;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.PictureBox pictureBoxParam;
@@ -311,6 +329,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxQuestion;
         private System.Windows.Forms.TextBox textBoxVoen;
         private System.Windows.Forms.Label labelVoen;
+        private System.Windows.Forms.PictureBox pictureBoxReport;
     }
 }
 
