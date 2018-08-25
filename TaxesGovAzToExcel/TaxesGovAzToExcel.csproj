@@ -65,43 +65,41 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\question_mark_PNG48.png" />
+    <None Include="Resources\VN_logo.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\images.jpg" />
+    <None Include="Resources\report.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2000px-Microsoft_Excel_2013_logo.svg.png" />
+    <None Include="Resources\param.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Iconstoc-Ms-Office-2013-Excel.ico" />
+    <None Include="Resources\question.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\img_41580.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\img_374176.png" />
+    <None Include="Resources\Ms_Office_Excel_logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

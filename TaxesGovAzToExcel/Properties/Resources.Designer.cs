@@ -63,9 +63,9 @@ namespace TaxesGovAzToExcel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _2000px_Microsoft_Excel_2013_logo_svg {
+        internal static System.Drawing.Bitmap Ms_Office_Excel_logo {
             get {
-                object obj = ResourceManager.GetObject("2000px-Microsoft_Excel_2013_logo.svg", resourceCulture);
+                object obj = ResourceManager.GetObject("Ms_Office_Excel_logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace TaxesGovAzToExcel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Iconstoc_Ms_Office_2013_Excel {
+        internal static System.Drawing.Bitmap param {
             get {
-                object obj = ResourceManager.GetObject("Iconstoc-Ms-Office-2013-Excel", resourceCulture);
+                object obj = ResourceManager.GetObject("param", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace TaxesGovAzToExcel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap images {
+        internal static System.Drawing.Bitmap question {
             get {
-                object obj = ResourceManager.GetObject("images", resourceCulture);
+                object obj = ResourceManager.GetObject("question", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace TaxesGovAzToExcel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_374176 {
+        internal static System.Drawing.Bitmap report {
             get {
-                object obj = ResourceManager.GetObject("img_374176", resourceCulture);
+                object obj = ResourceManager.GetObject("report", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,19 +103,9 @@ namespace TaxesGovAzToExcel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_41580 {
+        internal static System.Drawing.Bitmap VN_logo {
             get {
-                object obj = ResourceManager.GetObject("img_41580", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap question_mark_PNG48 {
-            get {
-                object obj = ResourceManager.GetObject("question_mark_PNG48", resourceCulture);
+                object obj = ResourceManager.GetObject("VN_logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

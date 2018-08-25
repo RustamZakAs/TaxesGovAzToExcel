@@ -44,16 +44,19 @@
             this.labelVoen = new System.Windows.Forms.Label();
             this.textBoxVoen = new System.Windows.Forms.TextBox();
             this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.pictureBoxReport = new System.Windows.Forms.PictureBox();
             this.pictureBoxParam = new System.Windows.Forms.PictureBox();
             this.pictureBoxQuestion = new System.Windows.Forms.PictureBox();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.numericUpDownGun = new System.Windows.Forms.NumericUpDown();
+            this.labelGun = new System.Windows.Forms.Label();
             this.panelParam.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGun)).BeginInit();
             this.SuspendLayout();
             // 
             // labelNov
@@ -177,9 +180,11 @@
             // 
             this.panelParam.BackColor = System.Drawing.SystemColors.Control;
             this.panelParam.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelParam.Controls.Add(this.labelGun);
+            this.panelParam.Controls.Add(this.numericUpDownGun);
             this.panelParam.Controls.Add(this.labelVoen);
             this.panelParam.Controls.Add(this.textBoxVoen);
-            this.panelParam.Location = new System.Drawing.Point(363, 6);
+            this.panelParam.Location = new System.Drawing.Point(285, 6);
             this.panelParam.Name = "panelParam";
             this.panelParam.Size = new System.Drawing.Size(218, 227);
             this.panelParam.TabIndex = 8;
@@ -196,24 +201,34 @@
             // 
             // textBoxVoen
             // 
-            this.textBoxVoen.Location = new System.Drawing.Point(47, 4);
+            this.textBoxVoen.Location = new System.Drawing.Point(60, 4);
             this.textBoxVoen.Name = "textBoxVoen";
-            this.textBoxVoen.Size = new System.Drawing.Size(164, 20);
+            this.textBoxVoen.Size = new System.Drawing.Size(151, 20);
             this.textBoxVoen.TabIndex = 9;
+            this.textBoxVoen.Text = "1501069851";
             // 
             // richTextBoxQuestion
             // 
             this.richTextBoxQuestion.Location = new System.Drawing.Point(363, 6);
             this.richTextBoxQuestion.Name = "richTextBoxQuestion";
             this.richTextBoxQuestion.Size = new System.Drawing.Size(218, 227);
-            this.richTextBoxQuestion.TabIndex = 17;
+            this.richTextBoxQuestion.TabIndex = 21;
             this.richTextBoxQuestion.Text = "";
-            this.richTextBoxQuestion.Visible = false;
+            this.richTextBoxQuestion.TextChanged += new System.EventHandler(this.richTextBoxQuestion_TextChanged);
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.Image = global::TaxesGovAzToExcel.Properties.Resources.VN_logo;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(363, 6);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(218, 227);
+            this.pictureBoxLogo.TabIndex = 20;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // pictureBoxReport
             // 
             this.pictureBoxReport.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBoxReport.Image = global::TaxesGovAzToExcel.Properties.Resources.img_374176;
+            this.pictureBoxReport.Image = global::TaxesGovAzToExcel.Properties.Resources.report;
             this.pictureBoxReport.Location = new System.Drawing.Point(485, 233);
             this.pictureBoxReport.Name = "pictureBoxReport";
             this.pictureBoxReport.Size = new System.Drawing.Size(28, 26);
@@ -224,7 +239,7 @@
             // 
             // pictureBoxParam
             // 
-            this.pictureBoxParam.Image = global::TaxesGovAzToExcel.Properties.Resources.img_41580;
+            this.pictureBoxParam.Image = global::TaxesGovAzToExcel.Properties.Resources.param;
             this.pictureBoxParam.Location = new System.Drawing.Point(519, 233);
             this.pictureBoxParam.Name = "pictureBoxParam";
             this.pictureBoxParam.Size = new System.Drawing.Size(28, 26);
@@ -235,7 +250,8 @@
             // 
             // pictureBoxQuestion
             // 
-            this.pictureBoxQuestion.Image = global::TaxesGovAzToExcel.Properties.Resources.question_mark_PNG48;
+            this.pictureBoxQuestion.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxQuestion.Image = global::TaxesGovAzToExcel.Properties.Resources.question;
             this.pictureBoxQuestion.Location = new System.Drawing.Point(553, 233);
             this.pictureBoxQuestion.Name = "pictureBoxQuestion";
             this.pictureBoxQuestion.Size = new System.Drawing.Size(28, 26);
@@ -244,41 +260,57 @@
             this.pictureBoxQuestion.TabStop = false;
             this.pictureBoxQuestion.Click += new System.EventHandler(this.pictureBoxQuestion_Click);
             // 
-            // pictureBoxLogo
-            // 
-            this.pictureBoxLogo.Image = global::TaxesGovAzToExcel.Properties.Resources.images;
-            this.pictureBoxLogo.Location = new System.Drawing.Point(363, 6);
-            this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new System.Drawing.Size(218, 227);
-            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxLogo.TabIndex = 14;
-            this.pictureBoxLogo.TabStop = false;
-            // 
             // buttonStart
             // 
-            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonStart.Image = global::TaxesGovAzToExcel.Properties.Resources.Iconstoc_Ms_Office_2013_Excel;
+            this.buttonStart.AutoSize = true;
+            this.buttonStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonStart.Cursor = System.Windows.Forms.Cursors.Default;
+            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonStart.Image = global::TaxesGovAzToExcel.Properties.Resources.Ms_Office_Excel_logo;
             this.buttonStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonStart.Location = new System.Drawing.Point(8, 218);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(79, 40);
+            this.buttonStart.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonStart.Size = new System.Drawing.Size(86, 38);
             this.buttonStart.TabIndex = 7;
             this.buttonStart.Text = "Yüklə";
             this.buttonStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonStart.UseCompatibleTextRendering = true;
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Visible = false;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
+            // numericUpDownGun
+            // 
+            this.numericUpDownGun.Location = new System.Drawing.Point(60, 30);
+            this.numericUpDownGun.Name = "numericUpDownGun";
+            this.numericUpDownGun.Size = new System.Drawing.Size(151, 20);
+            this.numericUpDownGun.TabIndex = 10;
+            this.numericUpDownGun.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // labelGun
+            // 
+            this.labelGun.AutoSize = true;
+            this.labelGun.Location = new System.Drawing.Point(6, 32);
+            this.labelGun.Name = "labelGun";
+            this.labelGun.Size = new System.Drawing.Size(53, 13);
+            this.labelGun.TabIndex = 11;
+            this.labelGun.Text = "Gün fərgi:";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 265);
+            this.Controls.Add(this.panelParam);
+            this.Controls.Add(this.richTextBoxQuestion);
             this.Controls.Add(this.pictureBoxReport);
             this.Controls.Add(this.pictureBoxParam);
             this.Controls.Add(this.pictureBoxQuestion);
-            this.Controls.Add(this.panelParam);
-            this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.dateTimePickerSon);
             this.Controls.Add(this.labelSonTarix);
@@ -292,16 +324,17 @@
             this.Controls.Add(this.comboBoxHereket);
             this.Controls.Add(this.comboBoxNov);
             this.Controls.Add(this.labelNov);
-            this.Controls.Add(this.richTextBoxQuestion);
+            this.Controls.Add(this.pictureBoxLogo);
             this.Name = "Main";
             this.Text = "AR İnternet Vergi İdarəsinin elektron saytından məlumatların alınması";
             this.Click += new System.EventHandler(this.Main_Click);
             this.panelParam.ResumeLayout(false);
             this.panelParam.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGun)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,14 +355,16 @@
         private System.Windows.Forms.Label labelIlkTarix;
         private System.Windows.Forms.Label labelSonTarix;
         private System.Windows.Forms.DateTimePicker dateTimePickerSon;
-        private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.PictureBox pictureBoxParam;
         private System.Windows.Forms.Panel panelParam;
-        private System.Windows.Forms.RichTextBox richTextBoxQuestion;
         private System.Windows.Forms.TextBox textBoxVoen;
         private System.Windows.Forms.Label labelVoen;
         private System.Windows.Forms.PictureBox pictureBoxReport;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.Label labelGun;
+        private System.Windows.Forms.NumericUpDown numericUpDownGun;
+        private System.Windows.Forms.RichTextBox richTextBoxQuestion;
     }
 }
 

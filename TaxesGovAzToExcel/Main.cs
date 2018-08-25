@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -26,8 +25,6 @@ namespace TaxesGovAzToExcel
         //*****************************************
         public static int TaxesVeziyyet { get; set; }
         //*****************************************
-        public static string EVHFsVOEN { get; set; }
-        //*****************************************
         public Main()
         {
             InitializeComponent();
@@ -38,8 +35,6 @@ namespace TaxesGovAzToExcel
             /*1*/comboBoxNov.Items.Add("Elektro Qaimələr üzrə məlumatın alınması");
             /*2*/comboBoxNov.Items.Add("Əvəzləşmə ayı üzrə məlumatın alınması");
             /*3*/comboBoxNov.Items.Add("Depozit hesabından hərəkətin çıxarışı");
-
-            textBoxVoen.Text = "1501069851";
 
             if (comboBoxNov.Items.Count > 0) comboBoxNov.SelectedIndex = 0;
         }
@@ -57,6 +52,13 @@ namespace TaxesGovAzToExcel
             {
                 labelDocType.Visible = false;
                 comboBoxDocType.Visible = false;
+                labelLink.Visible = false;
+                textBoxLink.Visible = false;
+                labelIlkTarix.Visible = false;
+                labelSonTarix.Visible = false;
+                dateTimePickerIlk.Visible = false;
+                dateTimePickerSon.Visible = false;
+                buttonStart.Visible = false;
             }
             comboBoxHereket.Text = "";
             if (comboBoxHereket.Items.Count > 0) comboBoxHereket.SelectedIndex = 0;
@@ -135,7 +137,7 @@ namespace TaxesGovAzToExcel
             if (comboBoxDocType.Items.Count > 0) comboBoxDocType.SelectedIndex = 0;
         }
 
-        private static DateTime SQLStrToDate(string str)
+        private DateTime SQLStrToDate(string str)
         {
             string xyear = "", xmonth = "", xday = "";
             xyear += str[0];
@@ -150,7 +152,7 @@ namespace TaxesGovAzToExcel
             return date;
         }
 
-        private static string[] CreateLinkArray(string link, string beginDate, string endDate)
+        private string[] CreateLinkArray(string link, string beginDate, string endDate)
         {
             //EVHF    //https://vroom.e-taxes.gov.az/index/index/printServlet?tkn=OTAyMzEyNjI4OTA2OTQ1MTQ1LG51bGwsNCwxNTI4ODI5MjMyNTY2LDAwMTM4OTcx&w=2&v=&fd=20180612000000&td=20180612000000&s=&n=&sw=0&r=1&sv=1501069851
             //E-Qaimə //http://eqaime.e-taxes.gov.az/index/index/printServlet?tkn=OTAyMzEyNjI4OTA2OTQ1MTQ1LG51bGwsMywxNTI4ODI5MDQ3NzgzLDAwMTM4OTcx&w=2&v=&fd=20180612000000&td=20180612000000&s=&n=&sw=0&r=1&sv=1501069851
@@ -159,7 +161,7 @@ namespace TaxesGovAzToExcel
 
             TimeSpan difference = SQLStrToDate(endDate).Date - beginDateTime.Date;
             int days = (int)difference.TotalDays + 1;
-            Console.WriteLine($"{days} Days");
+            richTextBoxQuestion.AppendText($"{days} Days");
 
             string[] linkArray = new string[days];
 
@@ -185,27 +187,26 @@ namespace TaxesGovAzToExcel
                     @"&n=" +
                     @"&sw=" + (TaxesIO == "I" ? "0" : "1") +
                     @"&r=1" +
-                    @"&sv=" + EVHFsVOEN;
+                    @"&sv=" + textBoxVoen.Text;
             }
 
-            int xleft = Console.CursorLeft, xtop = Console.CursorTop;
             for (int i = 0; i < linkArray.Length; i++)
             {
                 try
                 {
-                    Console.SetCursorPosition(xleft, xtop);
-                    Console.WriteLine($"{i + 1} link oxunur");
+                    richTextBoxQuestion.AppendText($"{i + 1} link oxunur");
                     if (CheckLink(linkArray[i])) continue;
                     else throw new Exception("Линк не отвечает");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Error link: {e}");
+                    richTextBoxQuestion.AppendText($"Error link: {e}");
                 }
             }
 
             return linkArray;
         }
+
         public static void CreateDir(string path)
         {
             // Specify the directory you want to manipulate.
@@ -215,13 +216,13 @@ namespace TaxesGovAzToExcel
                 // Determine whether the directory exists.
                 if (Directory.Exists(path))
                 {
-                    Console.WriteLine("That path exists already.");
+                    //richTextBoxQuestion.AppendText("That path exists already.");
                     return;
                 }
 
                 // Try to create the directory.
                 DirectoryInfo di = Directory.CreateDirectory(path);
-                Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(path));
+                //richTextBoxQuestion.AppendText($"The directory was created successfully at {Directory.GetCreationTime(path)}.");
 
                 // Delete the directory.
                 //di.Delete();
@@ -229,7 +230,7 @@ namespace TaxesGovAzToExcel
             }
             catch (Exception e)
             {
-                Console.WriteLine("The process failed: {0}", e.ToString());
+                //richTextBoxQuestion.AppendText($"The process failed: {e.ToString()}");
             }
             finally { }
         }
@@ -264,15 +265,36 @@ namespace TaxesGovAzToExcel
             return false;
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        public void buttonStart_Click(object sender, EventArgs e)
         {
-            string[] linrArray = CreateLinkArray(textBoxLink.Text,
-                (Convert.ToString(dateTimePickerIlk.Value.Year) +
-                Convert.ToString(dateTimePickerIlk.Value.Month) +
-                Convert.ToString(dateTimePickerIlk.Value.Day)), 
-                (Convert.ToString(dateTimePickerSon.Value.Year) +
-                Convert.ToString(dateTimePickerSon.Value.Month) +
-                Convert.ToString(dateTimePickerSon.Value.Day)));
+            string dateIlk = Convert.ToString(dateTimePickerIlk.Value.Year);
+            if (dateTimePickerIlk.Value.Month < 10)
+            {
+                dateIlk += "0";
+                dateIlk += Convert.ToString(dateTimePickerIlk.Value.Month);
+            } else dateIlk += Convert.ToString(dateTimePickerIlk.Value.Month);
+            if (dateTimePickerIlk.Value.Day < 10)
+            {
+                dateIlk += "0";
+                dateIlk += Convert.ToString(dateTimePickerIlk.Value.Day);
+            }
+            else dateIlk += Convert.ToString(dateTimePickerIlk.Value.Day);
+
+            string dateSon = Convert.ToString(dateTimePickerSon.Value.Year);
+            if (dateTimePickerSon.Value.Month < 10)
+            {
+                dateSon += "0";
+                dateSon += Convert.ToString(dateTimePickerSon.Value.Month);
+            }
+            else dateSon += Convert.ToString(dateTimePickerSon.Value.Month);
+            if (dateTimePickerSon.Value.Day < 10)
+            {
+                dateSon += "0";
+                dateSon += Convert.ToString(dateTimePickerSon.Value.Day);
+            }
+            else dateSon += Convert.ToString(dateTimePickerSon.Value.Day);
+
+            string[] linrArray = CreateLinkArray(textBoxLink.Text,dateIlk,dateSon);
 
             List<EVHF> EVHFlist = new List<EVHF>();
             List<EQaime> EQlist = new List<EQaime>();
@@ -423,16 +445,20 @@ namespace TaxesGovAzToExcel
 
         private void textBoxLink_Leave(object sender, EventArgs e)
         {
-            bool tokenExsist = false;
-            if (CopyToken(textBoxLink.Text).Length > 0) tokenExsist = true;
-
-            if (tokenExsist == true)
+            if ((textBoxLink.Text).Length == 0)
+            {
+                MessageBox.Show("Link daxil edilməyib!");
+                textBoxLink.Focus();
+                return;
+            }
+            if (CopyToken(textBoxLink.Text).Length > 0)
             {
                 if (textBoxLink.Text.IndexOf("vroom") > -1)
                 {
                     if (DocType != 0)
                     {
                         MessageBox.Show("Link sehv daxil edilib!");
+                        textBoxLink.Focus();
                         return;
                     }
                 }
@@ -441,17 +467,18 @@ namespace TaxesGovAzToExcel
                     if (DocType != 1)
                     {
                         MessageBox.Show("Link sehv daxil edilib!");
+                        textBoxLink.Focus();
                         return;
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Link sehv daxil edilib!");
-                    return;
-                }
             }
-
-            dateTimePickerIlk.Value = dateTimePickerIlk.Value.AddDays(- 1);
+            else
+            {
+                MessageBox.Show("Link sehv daxil edilib!");
+                textBoxLink.Focus();
+                return;
+            }
+            dateTimePickerIlk.Value = dateTimePickerIlk.Value.AddDays(-Convert.ToDouble(numericUpDownGun.Value));
 
             labelIlkTarix.Visible = true;
             labelSonTarix.Visible = true;
@@ -468,6 +495,11 @@ namespace TaxesGovAzToExcel
                 labelLink.Visible = true;
                 textBoxLink.Visible = true;
             }
+        }
+
+        private void richTextBoxQuestion_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
