@@ -60,7 +60,7 @@ namespace TaxesGovAzToExcel
             MVQeyd = mVQeyd;
         }
 
-        public static void RZLoadFromTaxes(ref List<EQaime> EQlist, string[] link)
+        public void RZLoadFromTaxes(ref List<EQaime> EQlist, string[] link)
         {
             /*
             // The HtmlWeb class is a utility class to get the HTML over HTTP
@@ -130,12 +130,12 @@ namespace TaxesGovAzToExcel
                     string type;
                     if (Main.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
                     System.IO.File.WriteAllText($@"C:\RZUploadingTaxesDocuments\{type}{i}).html", result);
-                    //Console.WriteLine($"File {i} created");
+                    Main.information.Add($"File {i} created");
                 }
                 catch (Exception e)
                 {
-                    //richTextBoxQuestion.AppendText("---Qoshulamadi---"); //error
-                    //richTextBoxQuestion.AppendText(e);
+                    Main.information.Add("---Qoshulamadi---"); //error
+                    Main.information.Add(e.Message);
                     throw;
                 }
             }
@@ -167,13 +167,13 @@ namespace TaxesGovAzToExcel
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine("---Fayl oxunmuyor---");
-                    //Console.WriteLine(e.Message);
+                    Main.information.Add("---Fayl oxunmuyor---");
+                    Main.information.Add(e.Message);
                 }
                 //startDate = DateTime.Now; //--Time work start
                 //EVHFList.AddRange(StringToListEVHF(RZEncoding.HTMLToUTF8(htmlDoc.ParsedText)));
                 EQlist.AddRange(StringToListEQ(htmlDoc.ParsedText));
-                //Console.WriteLine($"File {m} added");
+                Main.information.Add($"File {m} added");
             }
 
             //DateTime endDate = DateTime.Now; //--Time work start
@@ -338,7 +338,7 @@ namespace TaxesGovAzToExcel
             }
             catch (Exception e)
             {
-                //Console.WriteLine("Couldn't create Excel file.\r\nException: " + e.Message);
+                Main.information.Add("Couldn't create Excel file.\r\nException: " + e.Message);
                 return;
             }
             //  Step 3:  Let's open our new Excel file and shut down this application.

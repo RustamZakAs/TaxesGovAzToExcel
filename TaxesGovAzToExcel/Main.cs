@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -11,6 +12,7 @@ namespace TaxesGovAzToExcel
 {
     public partial class Main : Form
     {
+        public static List<string> information = new List<string>(); 
         //*****************************************
         public static int DocType { get; set; }
         //*****************************************
@@ -37,6 +39,12 @@ namespace TaxesGovAzToExcel
             /*3*/comboBoxNov.Items.Add("Depozit hesabından hərəkətin çıxarışı");
 
             if (comboBoxNov.Items.Count > 0) comboBoxNov.SelectedIndex = 0;
+
+            panelParam.Visible = false;
+            richTextBoxQuestion.Visible = false;
+            pictureBoxLogo.Visible = true;
+            panelParam.Location = new Point(363, 6);
+            richTextBoxQuestion.Location = new Point(363, 6);
         }
 
         private void comboBoxNov_Leave(object sender, EventArgs e)
@@ -74,6 +82,7 @@ namespace TaxesGovAzToExcel
                 richTextBoxQuestion.Visible = false;
                 pictureBoxLogo.Visible = true;
             }
+            richTextBoxQuestion.Lines = information.ToArray();
         }
 
         private void pictureBoxParam_Click(object sender, EventArgs e)
@@ -137,7 +146,7 @@ namespace TaxesGovAzToExcel
             if (comboBoxDocType.Items.Count > 0) comboBoxDocType.SelectedIndex = 0;
         }
 
-        private DateTime SQLStrToDate(string str)
+        public DateTime SQLStrToDate(string str)
         {
             string xyear = "", xmonth = "", xday = "";
             xyear += str[0];
@@ -152,7 +161,7 @@ namespace TaxesGovAzToExcel
             return date;
         }
 
-        private string[] CreateLinkArray(string link, string beginDate, string endDate)
+        public string[] CreateLinkArray(string link, string beginDate, string endDate)
         {
             //EVHF    //https://vroom.e-taxes.gov.az/index/index/printServlet?tkn=OTAyMzEyNjI4OTA2OTQ1MTQ1LG51bGwsNCwxNTI4ODI5MjMyNTY2LDAwMTM4OTcx&w=2&v=&fd=20180612000000&td=20180612000000&s=&n=&sw=0&r=1&sv=1501069851
             //E-Qaimə //http://eqaime.e-taxes.gov.az/index/index/printServlet?tkn=OTAyMzEyNjI4OTA2OTQ1MTQ1LG51bGwsMywxNTI4ODI5MDQ3NzgzLDAwMTM4OTcx&w=2&v=&fd=20180612000000&td=20180612000000&s=&n=&sw=0&r=1&sv=1501069851
@@ -194,7 +203,7 @@ namespace TaxesGovAzToExcel
             {
                 try
                 {
-                    richTextBoxQuestion.AppendText($"{i + 1} link oxunur");
+                    information.Add($"{i + 1} link oxunur");
                     if (CheckLink(linkArray[i])) continue;
                     else throw new Exception("Линк не отвечает");
                 }
@@ -216,26 +225,26 @@ namespace TaxesGovAzToExcel
                 // Determine whether the directory exists.
                 if (Directory.Exists(path))
                 {
-                    //richTextBoxQuestion.AppendText("That path exists already.");
+                    information.Add("That path exists already.");
                     return;
                 }
 
                 // Try to create the directory.
                 DirectoryInfo di = Directory.CreateDirectory(path);
-                //richTextBoxQuestion.AppendText($"The directory was created successfully at {Directory.GetCreationTime(path)}.");
+                information.Add($"The directory was created successfully at {Directory.GetCreationTime(path)}.");
 
                 // Delete the directory.
                 //di.Delete();
-                //Console.WriteLine("The directory was deleted successfully.");
+                information.Add("The directory was deleted successfully.");
             }
             catch (Exception e)
             {
-                //richTextBoxQuestion.AppendText($"The process failed: {e.ToString()}");
+                information.Add($"The process failed: {e.ToString()}");
             }
             finally { }
         }
 
-        public static bool CheckLink(string link)
+        public bool CheckLink(string link)
         {
             //var htmlWeb = new HtmlWeb
             //{
@@ -300,17 +309,19 @@ namespace TaxesGovAzToExcel
             List<EQaime> EQlist = new List<EQaime>();
             if (DocType == 0)
             {
-                EVHF.RZLoadFromTaxes(ref EVHFlist, linrArray);
+                EVHF tempEVHF = new EVHF();
+                tempEVHF.RZLoadFromTaxes(ref EVHFlist, linrArray);
                 EVHF.CreateExcel(ref EVHFlist);
             }
             else
             {
-                EQaime.RZLoadFromTaxes(ref EQlist, linrArray);
+                EQaime tempEQaime = new EQaime();
+                tempEQaime.RZLoadFromTaxes(ref EQlist, linrArray);
                 EQaime.CreateExcel(ref EQlist);
             }
         }
 
-        private static string CopyToken(string link)
+        public string CopyToken(string link)
         {
             string XToken = "";
             for (int i = 0; i < link.Length; i++)
@@ -358,7 +369,7 @@ namespace TaxesGovAzToExcel
             }
             return XToken;
         }
-        private static string CopyVoen(string link)
+        public string CopyVoen(string link)
         {
             string XVoen = "";
             for (int i = 0; i < link.Length; i++)
@@ -415,7 +426,7 @@ namespace TaxesGovAzToExcel
             }
             return XVoen;
         }
-        private static bool ChackDate(string str)
+        public static bool ChackDate(string str)
         {
             if (str.Length == 8)
             {
@@ -447,7 +458,7 @@ namespace TaxesGovAzToExcel
         {
             if ((textBoxLink.Text).Length == 0)
             {
-                MessageBox.Show("Link daxil edilməyib!");
+                information.Add("Link daxil edilməyib!");
                 textBoxLink.Focus();
                 return;
             }
@@ -457,7 +468,7 @@ namespace TaxesGovAzToExcel
                 {
                     if (DocType != 0)
                     {
-                        MessageBox.Show("Link sehv daxil edilib!");
+                        information.Add("Link sehv daxil edilib!");
                         textBoxLink.Focus();
                         return;
                     }
@@ -466,7 +477,7 @@ namespace TaxesGovAzToExcel
                 {
                     if (DocType != 1)
                     {
-                        MessageBox.Show("Link sehv daxil edilib!");
+                        information.Add("Link sehv daxil edilib!");
                         textBoxLink.Focus();
                         return;
                     }
@@ -474,7 +485,7 @@ namespace TaxesGovAzToExcel
             }
             else
             {
-                MessageBox.Show("Link sehv daxil edilib!");
+                information.Add("Link sehv daxil edilib!");
                 textBoxLink.Focus();
                 return;
             }

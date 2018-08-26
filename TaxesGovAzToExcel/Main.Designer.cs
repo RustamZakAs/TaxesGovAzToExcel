@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.labelNov = new System.Windows.Forms.Label();
             this.comboBoxNov = new System.Windows.Forms.ComboBox();
             this.comboBoxHereket = new System.Windows.Forms.ComboBox();
@@ -41,6 +42,8 @@
             this.labelSonTarix = new System.Windows.Forms.Label();
             this.dateTimePickerSon = new System.Windows.Forms.DateTimePicker();
             this.panelParam = new System.Windows.Forms.Panel();
+            this.labelGun = new System.Windows.Forms.Label();
+            this.numericUpDownGun = new System.Windows.Forms.NumericUpDown();
             this.labelVoen = new System.Windows.Forms.Label();
             this.textBoxVoen = new System.Windows.Forms.TextBox();
             this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
@@ -49,14 +52,12 @@
             this.pictureBoxParam = new System.Windows.Forms.PictureBox();
             this.pictureBoxQuestion = new System.Windows.Forms.PictureBox();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.numericUpDownGun = new System.Windows.Forms.NumericUpDown();
-            this.labelGun = new System.Windows.Forms.Label();
             this.panelParam.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGun)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGun)).BeginInit();
             this.SuspendLayout();
             // 
             // labelNov
@@ -184,11 +185,32 @@
             this.panelParam.Controls.Add(this.numericUpDownGun);
             this.panelParam.Controls.Add(this.labelVoen);
             this.panelParam.Controls.Add(this.textBoxVoen);
-            this.panelParam.Location = new System.Drawing.Point(285, 6);
+            this.panelParam.Location = new System.Drawing.Point(296, 6);
             this.panelParam.Name = "panelParam";
             this.panelParam.Size = new System.Drawing.Size(218, 227);
             this.panelParam.TabIndex = 8;
             this.panelParam.Visible = false;
+            // 
+            // labelGun
+            // 
+            this.labelGun.AutoSize = true;
+            this.labelGun.Location = new System.Drawing.Point(6, 32);
+            this.labelGun.Name = "labelGun";
+            this.labelGun.Size = new System.Drawing.Size(53, 13);
+            this.labelGun.TabIndex = 11;
+            this.labelGun.Text = "Gün fərgi:";
+            // 
+            // numericUpDownGun
+            // 
+            this.numericUpDownGun.Location = new System.Drawing.Point(60, 30);
+            this.numericUpDownGun.Name = "numericUpDownGun";
+            this.numericUpDownGun.Size = new System.Drawing.Size(151, 20);
+            this.numericUpDownGun.TabIndex = 10;
+            this.numericUpDownGun.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // labelVoen
             // 
@@ -209,11 +231,12 @@
             // 
             // richTextBoxQuestion
             // 
-            this.richTextBoxQuestion.Location = new System.Drawing.Point(363, 6);
+            this.richTextBoxQuestion.Location = new System.Drawing.Point(335, 6);
             this.richTextBoxQuestion.Name = "richTextBoxQuestion";
             this.richTextBoxQuestion.Size = new System.Drawing.Size(218, 227);
             this.richTextBoxQuestion.TabIndex = 21;
             this.richTextBoxQuestion.Text = "";
+            this.richTextBoxQuestion.Visible = false;
             this.richTextBoxQuestion.TextChanged += new System.EventHandler(this.richTextBoxQuestion_TextChanged);
             // 
             // pictureBoxLogo
@@ -280,27 +303,6 @@
             this.buttonStart.Visible = false;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // numericUpDownGun
-            // 
-            this.numericUpDownGun.Location = new System.Drawing.Point(60, 30);
-            this.numericUpDownGun.Name = "numericUpDownGun";
-            this.numericUpDownGun.Size = new System.Drawing.Size(151, 20);
-            this.numericUpDownGun.TabIndex = 10;
-            this.numericUpDownGun.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // labelGun
-            // 
-            this.labelGun.AutoSize = true;
-            this.labelGun.Location = new System.Drawing.Point(6, 32);
-            this.labelGun.Name = "labelGun";
-            this.labelGun.Size = new System.Drawing.Size(53, 13);
-            this.labelGun.TabIndex = 11;
-            this.labelGun.Text = "Gün fərgi:";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,16 +327,19 @@
             this.Controls.Add(this.comboBoxNov);
             this.Controls.Add(this.labelNov);
             this.Controls.Add(this.pictureBoxLogo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(604, 304);
+            this.MinimumSize = new System.Drawing.Size(604, 304);
             this.Name = "Main";
             this.Text = "AR İnternet Vergi İdarəsinin elektron saytından məlumatların alınması";
             this.Click += new System.EventHandler(this.Main_Click);
             this.panelParam.ResumeLayout(false);
             this.panelParam.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGun)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuestion)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGun)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

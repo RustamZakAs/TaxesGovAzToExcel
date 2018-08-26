@@ -72,7 +72,7 @@ namespace TaxesGovAzToExcel
             return $"{IO}-{Voen}-{Ad}-{Tip}-{Veziyyet}-{Tarix}-{Seriya}-{Nomre}-{EsasQeyd}-{ElaveQeyd}-{EDVsiz}-{EDV}-{Hesab1C}-{MVQeyd}";
         }
 
-        public static void RZLoadFromTaxes(ref List<EVHF> EVHFList, string[] link)
+        public void RZLoadFromTaxes(ref List<EVHF> EVHFList, string[] link)
         {
             /*
             // The HtmlWeb class is a utility class to get the HTML over HTTP
@@ -119,7 +119,7 @@ namespace TaxesGovAzToExcel
             //*** var temp = Path.GetTempFileName();
             //*** var tempFile = temp.Replace(Path.GetExtension(temp), ".html");
 
-            //Main.CreateDir(@"C:\RZUploadingTaxesDocuments");
+            Main.CreateDir(@"C:\RZUploadingTaxesDocuments");
 
             for (int i = 0; i < link.Length; i++)
             {
@@ -142,12 +142,12 @@ namespace TaxesGovAzToExcel
                     string type;
                     if (Main.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
                     System.IO.File.WriteAllText($@"C:\RZUploadingTaxesDocuments\{type}{i}).html", result);
-                    //Console.WriteLine($"File {i} created");
+                    Main.information.Add($"File {i} created");
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine("---Qoshulamadi---");
-                    //Console.WriteLine(e);
+                    Main.information.Add("---Qoshulamadi---");
+                    Main.information.Add(e.Message);
                     throw;
                 }
             }
@@ -179,13 +179,13 @@ namespace TaxesGovAzToExcel
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine("---Fayl oxunmuyor---");
-                    //Console.WriteLine(e.Message);
+                    Main.information.Add("---Fayl oxunmuyor---");
+                    Main.information.Add(e.Message);
                 }
                 //startDate = DateTime.Now; //--Time work start
                 //EVHFList.AddRange(StringToListEVHF(RZEncoding.HTMLToUTF8(htmlDoc.ParsedText)));
                 EVHFList.AddRange(StringToListEVHF(htmlDoc.ParsedText));
-                //Console.WriteLine($"File {m} added");
+                Main.information.Add($"File {m} added");
             }
 
             //DateTime endDate = DateTime.Now; //--Time work start
@@ -193,7 +193,7 @@ namespace TaxesGovAzToExcel
             //*** Process.Start(new ProcessStartInfo(tempFile));
         }
 
-        public static List<EVHF> StringToListEVHF(string str)
+        public List<EVHF> StringToListEVHF(string str)
         {
             var RZEVHFList = new List<EVHF>();
             var RZEVHF = new EVHF();
@@ -316,7 +316,7 @@ namespace TaxesGovAzToExcel
             }
             catch (Exception e)
             {
-                //Console.WriteLine("Couldn't create Excel file.\r\nException: " + e.Message);
+                Main.information.Add("Couldn't create Excel file.\r\nException: " + e.Message);
                 return;
             }
             //  Step 3:  Let's open our new Excel file and shut down this application.
