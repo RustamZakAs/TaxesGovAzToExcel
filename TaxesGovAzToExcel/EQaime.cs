@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Windows.Forms;
 
 namespace TaxesGovAzToExcel
 {
@@ -95,19 +96,15 @@ namespace TaxesGovAzToExcel
                 }
             }
             */
-
             var htmlWeb = new HtmlWeb
             {
                 OverrideEncoding = Encoding.UTF8
             };
-            var htmlDoc = new HtmlDocument();
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
 
             //DateTime startDate = new DateTime(); //--Time work inicializing
-
             //*** var temp = Path.GetTempFileName();
             //*** var tempFile = temp.Replace(Path.GetExtension(temp), ".html");
-
-            Main.CreateDir(@"C:\RZUploadingTaxesDocuments");
 
             for (int i = 0; i < link.Length; i++)
             {
@@ -129,12 +126,12 @@ namespace TaxesGovAzToExcel
 
                     string type;
                     if (Main.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
-                    System.IO.File.WriteAllText($@"C:\RZUploadingTaxesDocuments\{type}{i}).html", result);
-                    Main.information.Add($"File {i} created");
+                    System.IO.File.WriteAllText(Main.TempSaveFileString + $@"\{type}{i+1}).html", result);
+                    Main.information.Add($"Fayl {i+1} yarandı");
                 }
                 catch (Exception e)
                 {
-                    Main.information.Add("---Qoshulamadi---"); //error
+                    Main.information.Add("---Əlagə yaranmadı!---"); //error
                     Main.information.Add(e.Message);
                     throw;
                 }
@@ -163,19 +160,18 @@ namespace TaxesGovAzToExcel
                     //htmlDoc.Load($@"C:\New folder\text{m}.html");
                     string type;
                     if (Main.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
-                    htmlDoc = htmlWeb.Load($@"C:\RZUploadingTaxesDocuments\{type}{m}).html");
+                    htmlDoc = htmlWeb.Load(Main.TempSaveFileString + $@"\{type}{m+1}).html");
                 }
                 catch (Exception e)
                 {
-                    Main.information.Add("---Fayl oxunmuyor---");
+                    Main.information.Add("---Fayl oxuna bilmədi!---");
                     Main.information.Add(e.Message);
                 }
                 //startDate = DateTime.Now; //--Time work start
                 //EVHFList.AddRange(StringToListEVHF(RZEncoding.HTMLToUTF8(htmlDoc.ParsedText)));
                 EQlist.AddRange(StringToListEQ(htmlDoc.ParsedText));
-                Main.information.Add($"File {m} added");
+                Main.information.Add($"Fayl {m+1} əlavə edildi");
             }
-
             //DateTime endDate = DateTime.Now; //--Time work start
             //Console.WriteLine(endDate - startDate);  // raznica vo vremeni raboti
             //*** Process.Start(new ProcessStartInfo(tempFile));
@@ -251,7 +247,6 @@ namespace TaxesGovAzToExcel
                         RZEQ/*[12]*/.Hesab1C = (Main.TaxesIO == "I" ? "531.1" : "211.3");
                         RZEQ/*[13]*/.MVQeyd = "";
                         //Console.WriteLine(RZEVHF.ToString());
-
                         switch (Main.TaxesVeziyyet)
                         {
                             case 1:
@@ -285,21 +280,6 @@ namespace TaxesGovAzToExcel
                                 RZEQList.Add(new EQaime(RZEQ));
                                 break;
                         }
-
-                        //RZEVHFList.Add(new EVHF(RZEVHF[0], 
-                        //    RZEVHF[1], 
-                        //    RZEVHF[2], 
-                        //    RZEVHF[3], 
-                        //    RZEVHF[4], 
-                        //    RZEVHF[5],
-                        //    RZEVHF[6],
-                        //    RZEVHF[7],
-                        //    RZEVHF[8],
-                        //    RZEVHF[9],
-                        //    RZEVHF[10],
-                        //    RZEVHF[11],
-                        //    RZEVHF[12],
-                        //    RZEVHF[13]));
                         count = 0;
                     }
                 }
@@ -313,7 +293,8 @@ namespace TaxesGovAzToExcel
             //#if DEBUG
             //  We'll attempt to create our example .XLSX file in our "My Documents" folder
             string MyDocumentsPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, "Sample.xlsx");
+            string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, Main.SaveFileName);
+            //string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, "Sample.xlsx");
             //#else
             // Prompt the user to enter a path/filename to save an example Excel file to
             //saveFileDialog1.FileName = "Sample.xlsx";
@@ -338,7 +319,7 @@ namespace TaxesGovAzToExcel
             }
             catch (Exception e)
             {
-                Main.information.Add("Couldn't create Excel file.\r\nException: " + e.Message);
+                Main.information.Add("Excel faylını yaratmaq alınmadı.\r\nException: " + e.Message);
                 return;
             }
             //  Step 3:  Let's open our new Excel file and shut down this application.

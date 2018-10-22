@@ -77,9 +77,8 @@
             this.comboBoxNov.Name = "comboBoxNov";
             this.comboBoxNov.Size = new System.Drawing.Size(345, 21);
             this.comboBoxNov.TabIndex = 1;
-            this.comboBoxNov.SelectedIndexChanged += new System.EventHandler(this.comboBoxNov_Leave);
-            this.comboBoxNov.Enter += new System.EventHandler(this.comboBoxNov_Leave);
-            this.comboBoxNov.Leave += new System.EventHandler(this.comboBoxNov_Leave);
+            this.comboBoxNov.SelectedIndexChanged += new System.EventHandler(this.comboBoxNov_Changed);
+            this.comboBoxNov.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxNov_KeyPress);
             // 
             // comboBoxHereket
             // 
@@ -90,7 +89,7 @@
             this.comboBoxHereket.TabIndex = 2;
             this.comboBoxHereket.Visible = false;
             this.comboBoxHereket.SelectedIndexChanged += new System.EventHandler(this.comboBoxHereket_Changed);
-            this.comboBoxHereket.Leave += new System.EventHandler(this.comboBoxHereket_Changed);
+            this.comboBoxHereket.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxHereket_KeyPress);
             // 
             // labelHereket
             // 
@@ -107,9 +106,9 @@
             this.labelDocType.AutoSize = true;
             this.labelDocType.Location = new System.Drawing.Point(6, 89);
             this.labelDocType.Name = "labelDocType";
-            this.labelDocType.Size = new System.Drawing.Size(108, 13);
+            this.labelDocType.Size = new System.Drawing.Size(139, 13);
             this.labelDocType.TabIndex = 5;
-            this.labelDocType.Text = "Sənəd növünü seçin:";
+            this.labelDocType.Text = "Sənədlərin vəziyyətini seçin:";
             this.labelDocType.Visible = false;
             // 
             // comboBoxDocType
@@ -122,7 +121,7 @@
             this.comboBoxDocType.TabIndex = 3;
             this.comboBoxDocType.Visible = false;
             this.comboBoxDocType.SelectedIndexChanged += new System.EventHandler(this.comboBoxDocType_Changed);
-            this.comboBoxDocType.Leave += new System.EventHandler(this.comboBoxDocType_Leave);
+            this.comboBoxDocType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxDocType_KeyPress);
             // 
             // labelLink
             // 
@@ -316,7 +315,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 272);
+            this.ClientSize = new System.Drawing.Size(588, 271);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.panelParam);
             this.Controls.Add(this.richTextBoxQuestion);
@@ -342,6 +341,7 @@
             this.MinimumSize = new System.Drawing.Size(604, 310);
             this.Name = "Main";
             this.Text = "AR İnternet Vergi İdarəsinin elektron saytından məlumatların alınması";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Click += new System.EventHandler(this.Main_Click);
             this.panelParam.ResumeLayout(false);
             this.panelParam.PerformLayout();

@@ -78,7 +78,7 @@ namespace TaxesGovAzToExcel
             return $"{IO}-{Voen}-{Ad}-{Tip}-{Veziyyet}-{Tarix}-{Seriya}-{Nomre}-{EsasQeyd}-{ElaveQeyd}-{EDVsiz}-{EDV}-{Hesab1C}-{MVQeyd}";
         }
 
-        public void RZLoadFromTaxes(ref List<EVHF> EVHFList, string[] link, ProgressBar progressBar = null)
+        public void RZLoadFromTaxes(ref List<EVHF> EVHFList, ref string[] link, ref ProgressBar progressBar)
         {
             /*
             // The HtmlWeb class is a utility class to get the HTML over HTTP
@@ -124,8 +124,6 @@ namespace TaxesGovAzToExcel
             //*** var temp = Path.GetTempFileName();
             //*** var tempFile = temp.Replace(Path.GetExtension(temp), ".html");
 
-            Main.CreateDir(@"C:\RZUploadingTaxesDocuments");
-
             for (int i = 0; i < link.Length; i++)
             {
                 if (progressBar != null) progressBar.Value += 1;
@@ -147,12 +145,12 @@ namespace TaxesGovAzToExcel
 
                     string type;
                     if (Main.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
-                    System.IO.File.WriteAllText($@"C:\RZUploadingTaxesDocuments\{type}{i}).html", result);
-                    Main.information.Add($"File {i} created");
+                    System.IO.File.WriteAllText(Main.TempSaveFileString + $@"\{type}{i+1}).html", result);
+                    Main.information.Add($"Fayl {i+1} yarandı");
                 }
                 catch (Exception e)
                 {
-                    Main.information.Add("---Qoşulamadı---");
+                    Main.information.Add("---Əlagə yaranmadı!---");
                     Main.information.Add(e.Message);
                     //throw;
                 }
@@ -181,7 +179,7 @@ namespace TaxesGovAzToExcel
                     //htmlDoc.Load($@"C:\New folder\text{m}.html");
                     string type;
                     if (Main.DocType == 0) type = "EVHF("; else type = "E-Qaime(";
-                    htmlDoc = htmlWeb.Load($@"C:\RZUploadingTaxesDocuments\{type}{m}).html");
+                    htmlDoc = htmlWeb.Load(Main.TempSaveFileString + $@"\{type}{m+1}).html");
                 }
                 catch (Exception e)
                 {
@@ -191,9 +189,8 @@ namespace TaxesGovAzToExcel
                 //startDate = DateTime.Now; //--Time work start
                 //EVHFList.AddRange(StringToListEVHF(RZEncoding.HTMLToUTF8(htmlDoc.ParsedText)));
                 EVHFList.AddRange(StringToListEVHF(htmlDoc.ParsedText));
-                Main.information.Add($"File {m} added");
+                Main.information.Add($"File {m+1} added");
             }
-
             //DateTime endDate = DateTime.Now; //--Time work start
             //Console.WriteLine(endDate - startDate);  // raznica vo vremeni raboti
             //*** Process.Start(new ProcessStartInfo(tempFile));
@@ -270,20 +267,6 @@ namespace TaxesGovAzToExcel
                             if (RZEVHF.Tip == "D") RZEVHFList.Add(new EVHF(RZEVHF));
                         }
                         else RZEVHFList.Add(new EVHF(RZEVHF));
-                        //RZEVHFList.Add(new EVHF(RZEVHF[0], 
-                        //    RZEVHF[1], 
-                        //    RZEVHF[2], 
-                        //    RZEVHF[3], 
-                        //    RZEVHF[4], 
-                        //    RZEVHF[5],
-                        //    RZEVHF[6],
-                        //    RZEVHF[7],
-                        //    RZEVHF[8],
-                        //    RZEVHF[9],
-                        //    RZEVHF[10],
-                        //    RZEVHF[11],
-                        //    RZEVHF[12],
-                        //    RZEVHF[13]));
                         count = 0;
                     }
                 }
@@ -297,8 +280,7 @@ namespace TaxesGovAzToExcel
             //#if DEBUG
             //  We'll attempt to create our example .XLSX file in our "My Documents" folder
             string MyDocumentsPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            SaveFileDialog sfd = new SaveFileDialog();
-            string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, sfd.FileName);
+            string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, Main.SaveFileName);
             //string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, "Sample.xlsx");
             //#else
             // Prompt the user to enter a path/filename to save an example Excel file to

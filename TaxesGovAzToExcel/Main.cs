@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +17,7 @@ namespace TaxesGovAzToExcel
         //*****************************************
         public static int DocType { get; set; }
         //*****************************************
-        public static string TaxesIO { get; set; }
+        public static string TaxesIO { get; set; }  //Gələnlər, Göndərdiklərim
         //*****************************************
         private static string myTextForBegin;
         public static string TextForBegin
@@ -27,6 +28,11 @@ namespace TaxesGovAzToExcel
         //*****************************************
         public static int TaxesVeziyyet { get; set; }
         //*****************************************
+        public static string TaxesToken { get; set; }
+        //*****************************************
+        public static string SaveFileName { get; set; }
+        public static string TempSaveFileString { get; set; }
+
         public Main()
         {
             InitializeComponent();
@@ -35,8 +41,8 @@ namespace TaxesGovAzToExcel
 
             /*0*/comboBoxNov.Items.Add("Elektron Vergi Hesab Faktralar üzrə məlumatın alınması");
             /*1*/comboBoxNov.Items.Add("Elektro Qaimələr üzrə məlumatın alınması");
-            /*2*/comboBoxNov.Items.Add("Əvəzləşmə ayı üzrə məlumatın alınması");
-            /*3*/comboBoxNov.Items.Add("Depozit hesabından hərəkətin çıxarışı");
+            /*2*///comboBoxNov.Items.Add("Əvəzləşmə ayı üzrə məlumatın alınması");
+            /*3*///comboBoxNov.Items.Add("Depozit hesabından hərəkətin çıxarışı");
 
             if (comboBoxNov.Items.Count > 0) comboBoxNov.SelectedIndex = 0;
 
@@ -45,9 +51,12 @@ namespace TaxesGovAzToExcel
             pictureBoxLogo.Visible = true;
             panelParam.Location = new Point(363, 6);
             richTextBoxQuestion.Location = new Point(363, 6);
+
+            TempSaveFileString = @"C:\RZUploadingTaxesDocuments";
+            Main.CreateDir(TempSaveFileString);
         }
 
-        private void comboBoxNov_Leave(object sender, EventArgs e)
+        private void comboBoxNov_Changed(object sender, EventArgs e)
         {
             labelHereket.Visible = true;
             comboBoxHereket.Visible = true;
@@ -71,7 +80,7 @@ namespace TaxesGovAzToExcel
             }
             comboBoxHereket.Text = "";
             if (comboBoxHereket.Items.Count > 0) comboBoxHereket.SelectedIndex = 0;
-            //textBoxLink.Text = "";
+            DocType = comboBoxNov.SelectedIndex;
         }
 
         private void pictureBoxQuestion_Click(object sender, EventArgs e)
@@ -124,25 +133,41 @@ namespace TaxesGovAzToExcel
                 comboBoxDocType.Items.Clear();
                 if (comboBoxNov.SelectedIndex == 0)
                 {
-                    /*0*/comboBoxDocType.Items.Add("Hamısı");
-                    /*1*/comboBoxDocType.Items.Add("Normal");
-                    /*2*/comboBoxDocType.Items.Add("Ləğv olunmuşlar");
-                    /*3*/comboBoxDocType.Items.Add("Dəqiqləşmiş");
+                    /*0*/
+                    comboBoxDocType.Items.Add("Hamısı");
+                    /*1*/
+                    comboBoxDocType.Items.Add("Normal");
+                    /*2*/
+                    comboBoxDocType.Items.Add("Ləğv olunmuşlar");
+                    /*3*/
+                    comboBoxDocType.Items.Add("Dəqiqləşmiş");
                 }
                 else if (comboBoxNov.SelectedIndex == 1)
                 {
-                    /*0*/ comboBoxDocType.Items.Add("Hamısı");
-                    /*1*/ comboBoxDocType.Items.Add("Dəqiqləşmiş");
-                    /*2*/ comboBoxDocType.Items.Add("Ləğv edilib (Qaimə ləğv edilib)");
-                    /*3*/ comboBoxDocType.Items.Add("(Təsdiq gözləyən)");
-                    /*4*/ comboBoxDocType.Items.Add("Normal(Təsdiqlənmiş)");
-                    /*5*/ comboBoxDocType.Items.Add("EVHF hazırlanıb (Faktura hazırlanıb)");
-                    /*6*/ comboBoxDocType.Items.Add("Rədd olunub (Rədd olunub)");
-                    /*7*/ comboBoxDocType.Items.Add("EVHF göndərilib (Faktura göndərilib)");
-                    /*8*/ comboBoxDocType.Items.Add("EVHF ləğv olunub (Faktura ləğv olunub)");
-                    /*9*/ comboBoxDocType.Items.Add("(Sistem tərəfindən təsdiqlənmiş)");
-                    /*10*/comboBoxDocType.Items.Add("Sistem EVHF hazırlayıb (Sistem fakturanı hazırlayıb)");
-                    /*11*/comboBoxDocType.Items.Add("Sistem qaiməni ləğv edib (Sistem qaiməni ləğv edib)");
+                    /*0*/
+                    comboBoxDocType.Items.Add("Hamısı");
+                    /*1*/
+                    comboBoxDocType.Items.Add("Dəqiqləşmiş");
+                    /*2*/
+                    comboBoxDocType.Items.Add("Ləğv edilib (Qaimə ləğv edilib)");
+                    /*3*/
+                    comboBoxDocType.Items.Add("(Təsdiq gözləyən)");
+                    /*4*/
+                    comboBoxDocType.Items.Add("Normal(Təsdiqlənmiş)");
+                    /*5*/
+                    comboBoxDocType.Items.Add("EVHF hazırlanıb (Faktura hazırlanıb)");
+                    /*6*/
+                    comboBoxDocType.Items.Add("Rədd olunub (Rədd olunub)");
+                    /*7*/
+                    comboBoxDocType.Items.Add("EVHF göndərilib (Faktura göndərilib)");
+                    /*8*/
+                    comboBoxDocType.Items.Add("EVHF ləğv olunub (Faktura ləğv olunub)");
+                    /*9*/
+                    comboBoxDocType.Items.Add("(Sistem tərəfindən təsdiqlənmiş)");
+                    /*10*/
+                    comboBoxDocType.Items.Add("Sistem EVHF hazırlayıb (Sistem fakturanı hazırlayıb)");
+                    /*11*/
+                    comboBoxDocType.Items.Add("Sistem qaiməni ləğv edib (Sistem qaiməni ləğv edib)");
                 }
             }
             if (comboBoxDocType.Items.Count > 0) comboBoxDocType.SelectedIndex = 0;
@@ -163,7 +188,7 @@ namespace TaxesGovAzToExcel
             return date;
         }
 
-        public string[] CreateLinkArray(string link, string beginDate, string endDate, ProgressBar progressBar = null)
+        public string[] CreateLinkArray(string token, string beginDate, string endDate, ProgressBar progressBar = null)
         {
             //EVHF    //https://vroom.e-taxes.gov.az/index/index/printServlet?tkn=OTAyMzEyNjI4OTA2OTQ1MTQ1LG51bGwsNCwxNTI4ODI5MjMyNTY2LDAwMTM4OTcx&w=2&v=&fd=20180612000000&td=20180612000000&s=&n=&sw=0&r=1&sv=1501069851
             //E-Qaimə //http://eqaime.e-taxes.gov.az/index/index/printServlet?tkn=OTAyMzEyNjI4OTA2OTQ1MTQ1LG51bGwsMywxNTI4ODI5MDQ3NzgzLDAwMTM4OTcx&w=2&v=&fd=20180612000000&td=20180612000000&s=&n=&sw=0&r=1&sv=1501069851
@@ -190,7 +215,7 @@ namespace TaxesGovAzToExcel
                 strDate += tempDateTime.Day.ToString().Length == 1 ? $"0{tempDateTime.Day.ToString()}" : $"{tempDateTime.Day.ToString()}";
 
                 linkArray[i] = @"http" + sayt[DocType] + ".e-taxes.gov.az/index/index/" +
-                    @"printServlet?tkn=" + CopyToken(link) +
+                    @"printServlet?tkn=" + token +
                     @"&w=2" +
                     @"&v=" +
                     @"&fd=" + strDate + @"000000" +
@@ -201,7 +226,7 @@ namespace TaxesGovAzToExcel
                     @"&r=1" +
                     @"&sv=" + textBoxVoen.Text;
             }
-            if (progressBar != null) progressBar.Value += 0;
+            if (progressBar != null) progressBar.Value = 0;
             for (int i = 0; i < linkArray.Length; i++)
             {
                 if (progressBar != null) progressBar.Value += 1;
@@ -238,7 +263,7 @@ namespace TaxesGovAzToExcel
 
                 // Delete the directory.
                 //di.Delete();
-                information.Add("The directory was deleted successfully.");
+                //information.Add("The directory was deleted successfully.");
             }
             catch (Exception e)
             {
@@ -279,13 +304,22 @@ namespace TaxesGovAzToExcel
 
         public void buttonStart_Click(object sender, EventArgs e)
         {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel file|*.xlsx";
+            sfd.Title = "Save Excel File";
+            sfd.ShowDialog();
+            SaveFileName = sfd.FileName;
+            if (sfd.FileName.Length == 0) return;
+
+            TaxesToken = CopyToken(textBoxLink.Text);
+
             TimeSpan span = dateTimePickerSon.Value - dateTimePickerIlk.Value;
 
-            progressBar.Maximum = span.Days;
+            progressBar.Maximum = span.Days + 1;
             progressBar.Minimum = 0;
             progressBar.Value = 0;
 
-            string[] linrArray = CreateLinkArray(textBoxLink.Text, DateToString(dateTimePickerIlk.Value), DateToString(dateTimePickerSon.Value), progressBar);
+            string[] linrArray = CreateLinkArray(TaxesToken, DateToString(dateTimePickerIlk.Value), DateToString(dateTimePickerSon.Value), progressBar);
 
             progressBar.Maximum = linrArray.Length;
             progressBar.Minimum = 0;
@@ -296,7 +330,7 @@ namespace TaxesGovAzToExcel
             if (DocType == 0)
             {
                 EVHF tempEVHF = new EVHF();
-                tempEVHF.RZLoadFromTaxes(ref EVHFlist, linrArray, progressBar);
+                tempEVHF.RZLoadFromTaxes(ref EVHFlist, ref linrArray, ref progressBar);
                 EVHF.CreateExcel(ref EVHFlist);
             }
             else
@@ -342,7 +376,14 @@ namespace TaxesGovAzToExcel
                         do
                         {
                             xlen = i + Xtemp.Length + x++;
-                            if (link[xlen] == '&') break;
+                            try
+                            {
+                                if (link[xlen] == '&') break;
+                            }
+                            catch (Exception)
+                            {
+                                return "";
+                            }
                             if (xlen <= link.Length - 1) XToken += link[xlen]; else break;
                         } while (true);
                     }
@@ -365,7 +406,14 @@ namespace TaxesGovAzToExcel
                             do
                             {
                                 xlen = i + Xtemp.Length + x++;
-                                if (link[xlen] == '&') break;
+                                try
+                                {
+                                    if (link[xlen] == '&') break;
+                                }
+                                catch (Exception)
+                                {
+                                    return "";
+                                }
                                 if (xlen <= link.Length - 1) XToken += link[xlen]; else break;
                             } while (true);
                         }
@@ -498,7 +546,6 @@ namespace TaxesGovAzToExcel
                 //textBoxLink.Focus();
                 return;
             }
-            dateTimePickerIlk.Value = dateTimePickerIlk.Value.AddDays(-Convert.ToDouble(numericUpDownGun.Value));
 
             labelIlkTarix.Visible = true;
             labelSonTarix.Visible = true;
@@ -514,12 +561,9 @@ namespace TaxesGovAzToExcel
             {
                 labelLink.Visible = true;
                 textBoxLink.Visible = true;
+
+                TaxesVeziyyet = comboBoxDocType.SelectedIndex;
             }
-        }
-
-        private void comboBoxDocType_Leave(object sender, EventArgs e)
-        {
-
         }
 
         private void textBoxLink_TextChanged(object sender, EventArgs e)
@@ -535,12 +579,54 @@ namespace TaxesGovAzToExcel
                     if (DocType == 1) return;
                 }
             }
+            else return;
+
+            dateTimePickerIlk.Value = dateTimePickerIlk.Value.AddDays(-Convert.ToDouble(numericUpDownGun.Value));
+
             labelIlkTarix.Visible = true;
             labelSonTarix.Visible = true;
             dateTimePickerIlk.Visible = true;
             dateTimePickerSon.Visible = true;
 
             buttonStart.Visible = true;
+        }
+
+        private void comboBoxNov_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                comboBoxHereket.Focus();
+            }
+        }
+
+        private void comboBoxHereket_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                comboBoxDocType.Focus();
+            }
+        }
+
+        private void comboBoxDocType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                textBoxLink.Focus();
+            }
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\RZUploadingTaxesDocuments");
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete();
+            }
         }
     }
 }

@@ -1,0 +1,16 @@
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\bin\Debug\TaxesGovAzToExcel.exe.config
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\bin\Debug\TaxesGovAzToExcel.exe
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\bin\Debug\TaxesGovAzToExcel.pdb
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\bin\Debug\DocumentFormat.OpenXml.dll
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\bin\Debug\HtmlAgilityPack.dll
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\bin\Debug\DocumentFormat.OpenXml.xml
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\bin\Debug\HtmlAgilityPack.pdb
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\bin\Debug\HtmlAgilityPack.xml
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\obj\Debug\TaxesGovAzToExcel.csprojAssemblyReference.cache
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\obj\Debug\TaxesGovAzToExcel.Main.resources
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\obj\Debug\TaxesGovAzToExcel.Properties.Resources.resources
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\obj\Debug\TaxesGovAzToExcel.csproj.GenerateResource.cache
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\obj\Debug\TaxesGovAzToExcel.csproj.CoreCompileInputs.cache
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\obj\Debug\TaxesGovAzToExcel.csproj.CopyComplete
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\obj\Debug\TaxesGovAzToExcel.exe
+D:\Project\TaxesGovAzToExcel\TaxesGovAzToExcel\obj\Debug\TaxesGovAzToExcel.pdb
