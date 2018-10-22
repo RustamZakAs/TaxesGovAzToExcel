@@ -12,7 +12,7 @@ namespace TaxesGovAzToExcel
 {
     public partial class Main : Form
     {
-        public static List<string> information = new List<string>(); 
+        public static List<string> information = new List<string>();
         //*****************************************
         public static int DocType { get; set; }
         //*****************************************
@@ -56,7 +56,8 @@ namespace TaxesGovAzToExcel
             {
                 comboBoxHereket.Items.Add("Gələnlər");
                 comboBoxHereket.Items.Add("Göndərdiklərim");
-            } else
+            }
+            else
             {
                 labelDocType.Visible = false;
                 comboBoxDocType.Visible = false;
@@ -70,6 +71,7 @@ namespace TaxesGovAzToExcel
             }
             comboBoxHereket.Text = "";
             if (comboBoxHereket.Items.Count > 0) comboBoxHereket.SelectedIndex = 0;
+            //textBoxLink.Text = "";
         }
 
         private void pictureBoxQuestion_Click(object sender, EventArgs e)
@@ -161,7 +163,7 @@ namespace TaxesGovAzToExcel
             return date;
         }
 
-        public string[] CreateLinkArray(string link, string beginDate, string endDate)
+        public string[] CreateLinkArray(string link, string beginDate, string endDate, ProgressBar progressBar = null)
         {
             //EVHF    //https://vroom.e-taxes.gov.az/index/index/printServlet?tkn=OTAyMzEyNjI4OTA2OTQ1MTQ1LG51bGwsNCwxNTI4ODI5MjMyNTY2LDAwMTM4OTcx&w=2&v=&fd=20180612000000&td=20180612000000&s=&n=&sw=0&r=1&sv=1501069851
             //E-Qaimə //http://eqaime.e-taxes.gov.az/index/index/printServlet?tkn=OTAyMzEyNjI4OTA2OTQ1MTQ1LG51bGwsMywxNTI4ODI5MDQ3NzgzLDAwMTM4OTcx&w=2&v=&fd=20180612000000&td=20180612000000&s=&n=&sw=0&r=1&sv=1501069851
@@ -180,6 +182,7 @@ namespace TaxesGovAzToExcel
 
             for (int i = 0; i < days; i++)
             {
+                if (progressBar != null) progressBar.Value += 1;
                 string strDate = "";
                 tempDateTime = beginDateTime.AddDays(i);
                 strDate = strDate + tempDateTime.Year.ToString();
@@ -198,9 +201,10 @@ namespace TaxesGovAzToExcel
                     @"&r=1" +
                     @"&sv=" + textBoxVoen.Text;
             }
-
+            if (progressBar != null) progressBar.Value += 0;
             for (int i = 0; i < linkArray.Length; i++)
             {
+                if (progressBar != null) progressBar.Value += 1;
                 try
                 {
                     information.Add($"{i + 1} link oxunur");
@@ -212,7 +216,6 @@ namespace TaxesGovAzToExcel
                     richTextBoxQuestion.AppendText($"Error link: {e}");
                 }
             }
-
             return linkArray;
         }
 
@@ -276,41 +279,24 @@ namespace TaxesGovAzToExcel
 
         public void buttonStart_Click(object sender, EventArgs e)
         {
-            string dateIlk = Convert.ToString(dateTimePickerIlk.Value.Year);
-            if (dateTimePickerIlk.Value.Month < 10)
-            {
-                dateIlk += "0";
-                dateIlk += Convert.ToString(dateTimePickerIlk.Value.Month);
-            } else dateIlk += Convert.ToString(dateTimePickerIlk.Value.Month);
-            if (dateTimePickerIlk.Value.Day < 10)
-            {
-                dateIlk += "0";
-                dateIlk += Convert.ToString(dateTimePickerIlk.Value.Day);
-            }
-            else dateIlk += Convert.ToString(dateTimePickerIlk.Value.Day);
+            TimeSpan span = dateTimePickerSon.Value - dateTimePickerIlk.Value;
 
-            string dateSon = Convert.ToString(dateTimePickerSon.Value.Year);
-            if (dateTimePickerSon.Value.Month < 10)
-            {
-                dateSon += "0";
-                dateSon += Convert.ToString(dateTimePickerSon.Value.Month);
-            }
-            else dateSon += Convert.ToString(dateTimePickerSon.Value.Month);
-            if (dateTimePickerSon.Value.Day < 10)
-            {
-                dateSon += "0";
-                dateSon += Convert.ToString(dateTimePickerSon.Value.Day);
-            }
-            else dateSon += Convert.ToString(dateTimePickerSon.Value.Day);
+            progressBar.Maximum = span.Days;
+            progressBar.Minimum = 0;
+            progressBar.Value = 0;
 
-            string[] linrArray = CreateLinkArray(textBoxLink.Text,dateIlk,dateSon);
+            string[] linrArray = CreateLinkArray(textBoxLink.Text, DateToString(dateTimePickerIlk.Value), DateToString(dateTimePickerSon.Value), progressBar);
+
+            progressBar.Maximum = linrArray.Length;
+            progressBar.Minimum = 0;
+            progressBar.Value   = 0;
 
             List<EVHF> EVHFlist = new List<EVHF>();
             List<EQaime> EQlist = new List<EQaime>();
             if (DocType == 0)
             {
                 EVHF tempEVHF = new EVHF();
-                tempEVHF.RZLoadFromTaxes(ref EVHFlist, linrArray);
+                tempEVHF.RZLoadFromTaxes(ref EVHFlist, linrArray, progressBar);
                 EVHF.CreateExcel(ref EVHFlist);
             }
             else
@@ -319,6 +305,25 @@ namespace TaxesGovAzToExcel
                 tempEQaime.RZLoadFromTaxes(ref EQlist, linrArray);
                 EQaime.CreateExcel(ref EQlist);
             }
+            MessageBox.Show("Yükləndi!");
+        }
+
+        private string DateToString(DateTime dateIn)
+        {
+            string date = Convert.ToString(dateIn.Year);
+            if (dateIn.Month < 10)
+            {
+                date += "0";
+                date += Convert.ToString(dateIn.Month);
+            }
+            else date += Convert.ToString(dateIn.Month);
+            if (dateIn.Day < 10)
+            {
+                date += "0";
+                date += Convert.ToString(dateIn.Day);
+            }
+            else date += Convert.ToString(dateIn.Day);
+            return date;
         }
 
         public string CopyToken(string link)
@@ -459,7 +464,8 @@ namespace TaxesGovAzToExcel
             if ((textBoxLink.Text).Length == 0)
             {
                 information.Add("Link daxil edilməyib!");
-                textBoxLink.Focus();
+                pictureBoxQuestion_Click(null,null);
+                //textBoxLink.Focus();
                 return;
             }
             if (CopyToken(textBoxLink.Text).Length > 0)
@@ -469,7 +475,8 @@ namespace TaxesGovAzToExcel
                     if (DocType != 0)
                     {
                         information.Add("Link sehv daxil edilib!");
-                        textBoxLink.Focus();
+                        pictureBoxQuestion_Click(null, null);
+                        //textBoxLink.Focus();
                         return;
                     }
                 }
@@ -478,7 +485,8 @@ namespace TaxesGovAzToExcel
                     if (DocType != 1)
                     {
                         information.Add("Link sehv daxil edilib!");
-                        textBoxLink.Focus();
+                        pictureBoxQuestion_Click(null, null);
+                        //textBoxLink.Focus();
                         return;
                     }
                 }
@@ -486,7 +494,8 @@ namespace TaxesGovAzToExcel
             else
             {
                 information.Add("Link sehv daxil edilib!");
-                textBoxLink.Focus();
+                pictureBoxQuestion_Click(null, null);
+                //textBoxLink.Focus();
                 return;
             }
             dateTimePickerIlk.Value = dateTimePickerIlk.Value.AddDays(-Convert.ToDouble(numericUpDownGun.Value));
@@ -508,9 +517,30 @@ namespace TaxesGovAzToExcel
             }
         }
 
-        private void richTextBoxQuestion_TextChanged(object sender, EventArgs e)
+        private void comboBoxDocType_Leave(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBoxLink_TextChanged(object sender, EventArgs e)
+        {
+            if (CopyToken(textBoxLink.Text).Length > 0)
+            {
+                if (textBoxLink.Text.IndexOf("vroom") > -1)
+                {
+                    if (DocType != 0) return;
+                }
+                else if (textBoxLink.Text.IndexOf("eqaime") > -1)
+                {
+                    if (DocType == 1) return;
+                }
+            }
+            labelIlkTarix.Visible = true;
+            labelSonTarix.Visible = true;
+            dateTimePickerIlk.Visible = true;
+            dateTimePickerSon.Visible = true;
+
+            buttonStart.Visible = true;
         }
     }
 }

@@ -52,6 +52,7 @@
             this.pictureBoxParam = new System.Windows.Forms.PictureBox();
             this.pictureBoxQuestion = new System.Windows.Forms.PictureBox();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.panelParam.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGun)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
@@ -121,6 +122,7 @@
             this.comboBoxDocType.TabIndex = 3;
             this.comboBoxDocType.Visible = false;
             this.comboBoxDocType.SelectedIndexChanged += new System.EventHandler(this.comboBoxDocType_Changed);
+            this.comboBoxDocType.Leave += new System.EventHandler(this.comboBoxDocType_Leave);
             // 
             // labelLink
             // 
@@ -139,6 +141,7 @@
             this.textBoxLink.Size = new System.Drawing.Size(345, 20);
             this.textBoxLink.TabIndex = 4;
             this.textBoxLink.Visible = false;
+            this.textBoxLink.TextChanged += new System.EventHandler(this.textBoxLink_TextChanged);
             this.textBoxLink.Leave += new System.EventHandler(this.textBoxLink_Leave);
             // 
             // dateTimePickerIlk
@@ -237,7 +240,6 @@
             this.richTextBoxQuestion.TabIndex = 21;
             this.richTextBoxQuestion.Text = "";
             this.richTextBoxQuestion.Visible = false;
-            this.richTextBoxQuestion.TextChanged += new System.EventHandler(this.richTextBoxQuestion_TextChanged);
             // 
             // pictureBoxLogo
             // 
@@ -291,7 +293,7 @@
             this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonStart.Image = global::TaxesGovAzToExcel.Properties.Resources.Ms_Office_Excel_logo;
             this.buttonStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonStart.Location = new System.Drawing.Point(8, 218);
+            this.buttonStart.Location = new System.Drawing.Point(8, 215);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonStart.Size = new System.Drawing.Size(86, 38);
@@ -303,11 +305,19 @@
             this.buttonStart.Visible = false;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(0, 263);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(588, 9);
+            this.progressBar.TabIndex = 22;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 265);
+            this.ClientSize = new System.Drawing.Size(588, 272);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.panelParam);
             this.Controls.Add(this.richTextBoxQuestion);
             this.Controls.Add(this.pictureBoxReport);
@@ -328,8 +338,8 @@
             this.Controls.Add(this.labelNov);
             this.Controls.Add(this.pictureBoxLogo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(604, 304);
-            this.MinimumSize = new System.Drawing.Size(604, 304);
+            this.MaximumSize = new System.Drawing.Size(604, 310);
+            this.MinimumSize = new System.Drawing.Size(604, 310);
             this.Name = "Main";
             this.Text = "AR İnternet Vergi İdarəsinin elektron saytından məlumatların alınması";
             this.Click += new System.EventHandler(this.Main_Click);
@@ -370,6 +380,7 @@
         private System.Windows.Forms.Label labelGun;
         private System.Windows.Forms.NumericUpDown numericUpDownGun;
         private System.Windows.Forms.RichTextBox richTextBoxQuestion;
+        public System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

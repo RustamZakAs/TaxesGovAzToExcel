@@ -9,13 +9,19 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace TaxesGovAzToExcel
 {
     public class EVHF : IComparable//, IEnumerator
     {
+        //Main tempMain; 
         public EVHF() { }
+        //public EVHF(ref Main main)
+        //{
+        //    tempMain = main;
+        //}
         public EVHF(string iO, string voen, string ad, string tip, string veziyyet, string tarix, string seriya, string nomre, string esasQeyd, string elaveQeyd, string eDVsiz, string eDV, string hesab1C, string mVQeyd)
         {
             IO = iO;
@@ -72,7 +78,7 @@ namespace TaxesGovAzToExcel
             return $"{IO}-{Voen}-{Ad}-{Tip}-{Veziyyet}-{Tarix}-{Seriya}-{Nomre}-{EsasQeyd}-{ElaveQeyd}-{EDVsiz}-{EDV}-{Hesab1C}-{MVQeyd}";
         }
 
-        public void RZLoadFromTaxes(ref List<EVHF> EVHFList, string[] link)
+        public void RZLoadFromTaxes(ref List<EVHF> EVHFList, string[] link, ProgressBar progressBar = null)
         {
             /*
             // The HtmlWeb class is a utility class to get the HTML over HTTP
@@ -107,12 +113,11 @@ namespace TaxesGovAzToExcel
                 }
             }
             */
-
             var htmlWeb = new HtmlWeb
             {
                 OverrideEncoding = Encoding.UTF8
             };
-            var htmlDoc = new HtmlDocument();
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
 
             //DateTime startDate = new DateTime(); //--Time work inicializing
 
@@ -123,6 +128,7 @@ namespace TaxesGovAzToExcel
 
             for (int i = 0; i < link.Length; i++)
             {
+                if (progressBar != null) progressBar.Value += 1;
                 try
                 {
                     //Запись в Stream всех ссылок для последующего отображения
@@ -146,9 +152,9 @@ namespace TaxesGovAzToExcel
                 }
                 catch (Exception e)
                 {
-                    Main.information.Add("---Qoshulamadi---");
+                    Main.information.Add("---Qoşulamadı---");
                     Main.information.Add(e.Message);
-                    throw;
+                    //throw;
                 }
             }
             // From File
@@ -291,7 +297,9 @@ namespace TaxesGovAzToExcel
             //#if DEBUG
             //  We'll attempt to create our example .XLSX file in our "My Documents" folder
             string MyDocumentsPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, "Sample.xlsx");
+            SaveFileDialog sfd = new SaveFileDialog();
+            string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, sfd.FileName);
+            //string TargetFilename = System.IO.Path.Combine(MyDocumentsPath, "Sample.xlsx");
             //#else
             // Prompt the user to enter a path/filename to save an example Excel file to
             //saveFileDialog1.FileName = "Sample.xlsx";
