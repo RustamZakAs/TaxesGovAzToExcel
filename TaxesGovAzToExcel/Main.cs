@@ -617,7 +617,7 @@ namespace TaxesGovAzToExcel
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\RZUploadingTaxesDocuments");
+            System.IO.DirectoryInfo di = new DirectoryInfo(TempSaveFileString);
 
             foreach (FileInfo file in di.GetFiles())
             {
