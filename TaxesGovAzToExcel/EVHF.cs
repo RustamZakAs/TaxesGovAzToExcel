@@ -141,6 +141,23 @@ namespace TaxesGovAzToExcel
                     {
                         Encoding = Encoding.UTF8
                     };
+
+                    // using System.Net;
+                    //ServicePointManager.Expect100Continue = true;
+                    //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                    // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+
+                    ServicePointManager.Expect100Continue = true;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
+                           //| SecurityProtocolType.Tls11
+                           //| SecurityProtocolType.Tls12
+                           | SecurityProtocolType.Ssl3
+                           | (SecurityProtocolType)3072;
+
+                    //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://google.com/api/");
+
                     var result = wc.DownloadString(link[i]);
 
                     string type;
@@ -152,6 +169,7 @@ namespace TaxesGovAzToExcel
                 {
                     Main.information.Add("---Əlagə yaranmadı!---");
                     Main.information.Add(e.Message);
+                    MessageBox.Show(e.Message);
                     //throw;
                 }
             }
